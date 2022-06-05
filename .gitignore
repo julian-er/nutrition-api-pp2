@@ -1,0 +1,11 @@
+# Ignore folders from mac pc's
+.DS_store
+
+# Ignore folder node_modules
+node_modules
+
+# Ignore enviroments variables
+.env
+
+# Ignore package-lock
+package-lock.json
