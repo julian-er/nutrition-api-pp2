@@ -9,6 +9,17 @@ CREATE TABLE IF NOT EXISTS nutritionist (
     user VARCHAR(20) DEFAULT NULL,
     email VARCHAR NOT NULL,
     password VARCHAR NOT NULL
-)
+); 
 
-SELECT * FROM nutritionist
+CREATE TABLE IF NOT EXISTS patients (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(35) DEFAULT NULL,
+    last_name VARCHAR(30) DEFAULT NULL,
+    PRIMARY KEY (id)
+);
+
+
+SELECT
+    *
+FROM
+    nutritionist

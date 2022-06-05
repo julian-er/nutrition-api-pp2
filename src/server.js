@@ -9,6 +9,7 @@ app.use(express.json()); // use JSON format
 
 //Routes
 app.use(require("./routes/nutritionists"));
+app.use(require("./routes/patients"));
 
 //Start Server
 app.listen(app.get("port"), () => {
