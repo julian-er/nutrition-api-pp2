@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/server.js"
+    "dev": "npm i && nodemon src/server.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
     "url": "https://github.com/julian-er/nutrition-api-pp2/issues"
   },
   "dependencies": {
+    "chalk": "^4.1.2",
     "express": "^4.18.1",
     "mysql": "^2.18.1"
   },
