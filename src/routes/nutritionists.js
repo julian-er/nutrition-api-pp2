@@ -9,9 +9,12 @@ router.get("/nutritionists", (req, res) => {
 
   mysqlConnection.query(query, (err, rows, fields) => {
     if (!err) {
-      res.json(rows);
+      res.status(200).json(rows);
     } else {
-      console.log(err);
+      res.status(500).json({
+        message: "Sorry we have an unespected error",
+        error : err.sqlMessage
+      });
     }
   });
 });
@@ -22,9 +25,12 @@ router.get("/nutritionists/:id", (req, res) => {
 
   mysqlConnection.query(query, [id], (err, rows, fields) => {
     if (!err) {
-      res.json(rows);
+      res.status(200).json(rows);
     } else {
-      console.log(err);
+      res.status(500).json({
+        message: "Sorry we have an unespected error",
+        error: err.sqlMessage
+      });
     }
   });
 });
@@ -41,12 +47,14 @@ router.post("/nutritionists", (req, res) => {
     [name, last_name, user, email, password],
     (err, rows, fields) => {
       if (!err) {
-        res.json({
-          statusCode: 200,
+        res.status(200).json({
           message: "Your nutritionis was created successfully",
         });
       } else {
-        console.log(err);
+        res.status(500).json({
+          message: "Sorry we have an unespected error",
+          error: err.sqlMessage
+        })
       }
     }
   );
@@ -61,32 +69,36 @@ router.put("/nutritionists/:id", (req, res) => {
 
   mysqlConnection.query(query, [name, last_name, id], (err, rows, fields) => {
     if (!err) {
-      res.json({
-        statusCode: 200,
+      res.status(200).json({
         message: "Your nutritionis was updated successfully",
       });
     } else {
-      console.log(err);
+      res.status(500).json({
+        message: "Sorry we have an unespected error",
+        error: err.sqlMessage
+      })
     }
   });
 });
 //#endregion
 
-//#region PutMethods
+//#region DeleteMethods
 router.delete("/nutritionists/:id", (req, res) => {
-    const { id } = req.params;
-    const query = `DELETE FROM nutritionist WHERE id = ?`;
-  
-    mysqlConnection.query(query, [id], (err, rows, fields) => {
-      if (!err) {
-        res.json({
-          statusCode: 200,
-          message: "Your nutritionis was deleted successfully",
-        });
-      } else {
-        console.log(err);
-      }
-    });
+  const { id } = req.params;
+  const query = `DELETE FROM nutritionist WHERE id = ?`;
+
+  mysqlConnection.query(query, [id], (err, rows, fields) => {
+    if (!err) {
+      res.status(200).json({
+        message: "Your nutritionis was deleted successfully",
+      });
+    } else {
+      res.status(500).json({
+        message: "Sorry we have an unespected error",
+        error : err.sqlMessage
+      })
+    }
   });
-  //#endregion
+});
+//#endregion
 module.exports = router;

@@ -9,9 +9,12 @@ router.get("/patients", (req, res) => {
 
   mysqlConnection.query(query, (err, rows, fields) => {
     if (!err) {
-      res.json(rows);
+      res.status(200).json(rows);
     } else {
-      console.log(err);
+      res.status(500).json({
+        message: "Sorry we have an unespected error",
+        error: err
+      });
     }
   });
 });

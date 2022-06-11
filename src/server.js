@@ -1,4 +1,5 @@
 const express = require("express");
+const chalk = require("chalk")
 const app = express();
 
 //Settings
@@ -13,5 +14,14 @@ app.use(require("./routes/patients"));
 
 //Start Server
 app.listen(app.get("port"), () => {
-  console.log("El servidor está levantado, en el puerto ", app.get("port"));
+
+  console.log(chalk.green("######################################"));
+  console.log(chalk.green("#####                            #####"));
+  console.log(chalk.green("#####    Educar en Nutrición     #####"));
+  console.log(chalk.green("#####           API              #####"));
+  console.log(chalk.green("#####                            #####"));
+  console.log(chalk.green("######################################"));
+  console.group();
+  console.log("The server is up and running! ", app.get("port"));
+  console.log("You can access here -> http://localhost:8000")
 });

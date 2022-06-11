@@ -1,4 +1,5 @@
 const mysql = require("mysql");
+const chalk = require("chalk");
 
 //Create connection to MySQL Server
 const mysqlConnection = mysql.createConnection({
@@ -8,13 +9,15 @@ const mysqlConnection = mysql.createConnection({
   database: "db_nutrition",
 });
 
-mysqlConnection.connect(function(err){
-    if(!err){
-        console.log('Conection to database succes!')
-    }else{
-        console.log('Sorry, we have some problems to conect your DB')
-        console.log(err)
-    }
-})
+mysqlConnection.connect(function (err) {
+  if (!err) {
+    console.log("Conection to database", chalk.bgGreen("Succes!"));
+  } else {
+    console.log("Conection to database", chalk.bgRed("Fail!"));
+    console.group();
+    console.log(chalk.red("The error shown below: "));
+    console.log(err.message);
+  }
+});
 
 module.exports = mysqlConnection; //Export module for use into other files
