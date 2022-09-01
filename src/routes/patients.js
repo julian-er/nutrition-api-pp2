@@ -20,4 +20,28 @@ router.get("/patients", (req, res) => {
 });
 
 //#endregion
+
+//#region PostMethods
+router.post("/patients", (req, res) => {
+  const { name, last_name } = req.body;
+  const query = `INSERT INTO patients ( name, last_name ) VALUES  (? , ?)`;
+
+  mysqlConnection.query(
+    query,
+    [name, last_name],
+    (err, rows, fields) => {
+      if (!err) {
+        res.status(200).json({
+          message: "Your patients was created successfully",
+        });
+      } else {
+        res.status(500).json({
+          message: "Sorry we have an unespected error",
+          error: err.sqlMessage
+        })
+      }
+    }
+  );
+});
+//#endregion
 module.exports = router;
