@@ -3,7 +3,7 @@ const router = express.Router();
 
 const mysqlConnection = require("../database");
 
-//#region GetMethods
+//#region GetMethodss 
 router.get("/patients", (req, res) => {
   const query = ` SELECT * FROM patients `;
 
