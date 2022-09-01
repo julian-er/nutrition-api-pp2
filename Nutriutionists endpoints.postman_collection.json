@@ -71,6 +71,34 @@
 			"response": []
 		},
 		{
+			"name": "Patients Creation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Hernan\",\r\n    \"last_name\" :  \"Test\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/patients",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"patients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Nutritionist Update",
 			"request": {
 				"method": "PUT",
