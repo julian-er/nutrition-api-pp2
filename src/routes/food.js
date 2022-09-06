@@ -27,7 +27,7 @@ router.post("/food", (req, res) => {
 
   mysqlConnection.query(
     query,
-    [name_food, ddescription, link_photo],
+    [name_food, description, link_photo],
     (err, rows, fields) => {
       if (!err) {
         res.status(200).json({
