@@ -18,6 +18,15 @@ CREATE TABLE IF NOT EXISTS patients (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS food (
+  id_food INT NOT NULL AUTO_INCREMENT,
+  name_food VARCHAR(45) NULL,
+  description VARCHAR(125) NULL,
+  link_photo VARCHAR(125) NULL,
+  PRIMARY KEY (id_food) 
+);
+
+
 
 SELECT
     *

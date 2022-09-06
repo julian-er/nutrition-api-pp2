@@ -5,7 +5,7 @@ const chalk = require("chalk");
 const mysqlConnection = mysql.createConnection({
   host: "localhost",
   user: "root", // User for yout SQL Server
-  password: "1402", //Pasword for your SQL Server
+  password: "", //Pasword for your SQL Server
   database: "db_nutrition",
 });
 
