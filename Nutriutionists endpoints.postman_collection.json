@@ -12,14 +12,9 @@
 				"header": [],
 				"url": {
 					"raw": "localhost:8000/nutritionists/1",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8000",
-					"path": [
-						"nutritionists",
-						"1"
-					]
+					"path": ["nutritionists", "1"]
 				}
 			},
 			"response": []
@@ -31,13 +26,9 @@
 				"header": [],
 				"url": {
 					"raw": "localhost:8000/nutritionists",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8000",
-					"path": [
-						"nutritionists"
-					]
+					"path": ["nutritionists"]
 				}
 			},
 			"response": []
@@ -55,17 +46,13 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Pipa\",\r\n    \"last_name\" :  \"Test\",\r\n    \"user\" : \"ptest\",\r\n    \"email\" : \"ptest@gmail.com\",\r\n    \"password\" : \"1234\"\r\n}"
+					"raw": "{\r\n    \"name\" : \"PatientName\",\r\n    \"last_name\" :  \"PatLastName\",\r\n    \"user\" : \"PatUser\",\r\n    \"password\" : \"Key1234\",\r\n    \"email\" : \"pattest@gmail.com\",\r\n     \"registration_number\" : \"1414\",\r\n    \"phone_number\" : \"340123456789\",\r\n    \"birth_date\" : \"1980-12-01\"\r\n  }"
 				},
 				"url": {
 					"raw": "localhost:8000/nutritionists",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8000",
-					"path": [
-						"nutritionists"
-					]
+					"path": ["nutritionists"]
 				}
 			},
 			"response": []
@@ -87,14 +74,9 @@
 				},
 				"url": {
 					"raw": "localhost:8000/nutritionists/14",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8000",
-					"path": [
-						"nutritionists",
-						"14"
-					]
+					"path": ["nutritionists", "14"]
 				}
 			},
 			"response": []
@@ -106,14 +88,9 @@
 				"header": [],
 				"url": {
 					"raw": "localhost:8000/nutritionists/17",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8000",
-					"path": [
-						"nutritionists",
-						"17"
-					]
+					"path": ["nutritionists", "17"]
 				}
 			},
 			"response": []
