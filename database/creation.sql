@@ -3,23 +3,15 @@ CREATE DATABASE IF NOT EXISTS db_nutrition;
 USE db_nutrition;
 
 CREATE TABLE IF NOT EXISTS nutritionist (
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(35) DEFAULT NULL,
-    last_name VARCHAR(30) DEFAULT NULL,
-    user VARCHAR(20) DEFAULT NULL,
-    email VARCHAR NOT NULL,
-    password VARCHAR NOT NULL
-); 
-
-CREATE TABLE IF NOT EXISTS patients (
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(35) DEFAULT NULL,
-    last_name VARCHAR(30) DEFAULT NULL,
-    PRIMARY KEY (id)
+     id_nutritionist INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR (45) NOT NULL,
+    last_name VARCHAR (45) NOT NULL,
+    user VARCHAR (45) NOT NULL,
+    password VARCHAR (45) NOT NULL,
+    email VARCHAR (45) NOT NULL,
+    registration_number VARCHAR (45) NOT NULL,
+    phone_number VARCHAR (45) NOT NULL,
+    birth_date DATE NOT NULL,
+    
+    PRIMARY KEY (id_nutritionist)
 );
-
-
-SELECT
-    *
-FROM
-    nutritionist
