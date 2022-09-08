@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 
 const mysqlConnection = require("../database");
 
@@ -13,7 +14,7 @@ router.get("/nutritionists", (req, res) => {
     } else {
       res.status(500).json({
         message: "Sorry we have an unespected error",
-        error : err.sqlMessage
+        error: err.sqlMessage,
       });
     }
   });
@@ -29,7 +30,7 @@ router.get("/nutritionists/:id", (req, res) => {
     } else {
       res.status(500).json({
         message: "Sorry we have an unespected error",
-        error: err.sqlMessage
+        error: err.sqlMessage,
       });
     }
   });
@@ -44,7 +45,7 @@ router.post("/nutritionists", (req, res) => {
 
   mysqlConnection.query(
     query,
-    [name, last_name, user, email, password],
+    [name, last_name, user, email, bcrypt.hashSync(password, 10)],
     (err, rows, fields) => {
       if (!err) {
         res.status(200).json({
@@ -53,8 +54,8 @@ router.post("/nutritionists", (req, res) => {
       } else {
         res.status(500).json({
           message: "Sorry we have an unespected error",
-          error: err.sqlMessage
-        })
+          error: err.sqlMessage,
+        });
       }
     }
   );
@@ -75,8 +76,8 @@ router.put("/nutritionists/:id", (req, res) => {
     } else {
       res.status(500).json({
         message: "Sorry we have an unespected error",
-        error: err.sqlMessage
-      })
+        error: err.sqlMessage,
+      });
     }
   });
 });
@@ -95,8 +96,8 @@ router.delete("/nutritionists/:id", (req, res) => {
     } else {
       res.status(500).json({
         message: "Sorry we have an unespected error",
-        error : err.sqlMessage
-      })
+        error: err.sqlMessage,
+      });
     }
   });
 });
