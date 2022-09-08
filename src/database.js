@@ -3,10 +3,10 @@ const chalk = require("chalk");
 
 //Create connection to MySQL Server
 const mysqlConnection = mysql.createConnection({
-  host: "localhost",
-  user: "root", // User for yout SQL Server
-  password: "1402", //Pasword for your SQL Server
-  database: "db_nutrition",
+	host: process.env.MYSQL_HOST,
+	user: process.env.MYSQL_ROOT_NAME, // User for yout SQL Server
+	password: process.env.MYSQL_PASSWORD, // Pasword for your SQL Server
+	database: process.env.MYSQL_DATABASE_NAME,
 });
 
 mysqlConnection.connect(function (err) {
