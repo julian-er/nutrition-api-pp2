@@ -1,11 +1,7 @@
-import dotenv from 'dotenv';
-dotenv.config();
 import express from 'express';
 import chalk from 'chalk';
 import { setRouter } from './routes/index.js';
 import { connectDatabase } from './database.js';
-
-//Environment variables config
 
 // Express initialization
 const app = express();
