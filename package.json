@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+		"prettier": "prettier --write ./**/*.{js,jsx,ts,tsx,json,scss}",
     "dev": "npm i && nodemon src/server.js"
   },
   "repository": {
@@ -24,6 +25,6 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+		"prettier": "^2.7.1"
   }
 }
