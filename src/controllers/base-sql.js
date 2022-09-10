@@ -29,7 +29,7 @@ export default class BaseSQLController {
 	 * @param {(response: any) => void} onSuccess The success callback
 	 * @param {(error: Error) => void} onError The error callback
 	 */
-	get(query, onSuccess, onError) {
+	getAll(query, onSuccess, onError) {
 		mysqlConnection.query(query, (error, rows, _fields) => {
 			if (!error) {
 				onSuccess(rows);

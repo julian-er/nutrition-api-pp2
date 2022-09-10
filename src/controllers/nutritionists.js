@@ -12,9 +12,9 @@ export class NutritionistsController extends BaseSQLController {
 	 * @param {Response} res The Express response
 	 */
 	getNutritionists(_req, res) {
-		const query = ` SELECT * FROM nutritionist `;
+		const query = `SELECT * FROM nutritionist`;
 
-		this.get(
+		this.getAll(
 			query,
 			response => res.status(200).json(response),
 			error => res.status(500).json(error)
@@ -27,7 +27,7 @@ export class NutritionistsController extends BaseSQLController {
 	 * @param {Response} res The Express response
 	 */
 	getNutritionistById(req, res) {
-		const query = ` SELECT * FROM nutritionist WHERE id = ? `;
+		const query = `SELECT * FROM nutritionist WHERE id = ? `;
 		const { id } = req.params; // Also you can use this other notation req.params.id to see the param
 
 		this.getById(
@@ -78,7 +78,7 @@ export class NutritionistsController extends BaseSQLController {
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
-	getNutritionistById(req, res) {
+	deleteNutritionist(req, res) {
 		const { id } = req.params;
 		const query = `DELETE FROM nutritionist WHERE id = ?`;
 
