@@ -1,31 +1,32 @@
 {
-  "name": "nutricion-api",
-  "version": "1.0.0",
-  "description": "",
+	"name": "nutricion-api",
+	"version": "1.0.0",
+	"description": "",
 	"main": "./src/server.js",
-  "scripts": {
+	"type": "module",
+	"scripts": {
 		"prettier": "prettier --write ./**/*.{js,jsx,ts,tsx,json,scss}",
-    "dev": "npm i && nodemon src/server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/julian-er/nutrition-api-pp2.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/julian-er/nutrition-api-pp2/issues"
-  },
-  "dependencies": {
-    "bcrypt": "^5.0.1",
+		"dev": "npm i && nodemon src/server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/julian-er/nutrition-api-pp2.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/julian-er/nutrition-api-pp2/issues"
+	},
+	"dependencies": {
+		"bcrypt": "^5.0.1",
 		"chalk": "^5.0.1",
-    "dotenv": "^16.0.2",
-    "express": "^4.18.1",
-    "mysql": "^2.18.1"
-  },
-  "devDependencies": {
+		"dotenv": "^16.0.2",
+		"express": "^4.18.1",
+		"mysql": "^2.18.1"
+	},
+	"devDependencies": {
 		"nodemon": "^2.0.19",
 		"prettier": "^2.7.1"
-  }
+	}
 }
