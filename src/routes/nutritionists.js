@@ -1,6 +1,5 @@
-const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcrypt");
+const router = require('./index.js')
 
 const mysqlConnection = require("../database");
 
@@ -102,4 +101,3 @@ router.delete("/nutritionists/:id", (req, res) => {
   });
 });
 //#endregion
-module.exports = router;

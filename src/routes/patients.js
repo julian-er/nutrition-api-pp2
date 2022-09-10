@@ -1,7 +1,6 @@
-const express = require("express");
-const router = express.Router();
-
 const mysqlConnection = require("../database");
+const router = require('./index.js')
+
 
 //#region GetMethodss 
 router.get("/patients", (req, res) => {
@@ -20,4 +19,3 @@ router.get("/patients", (req, res) => {
 });
 
 //#endregion
-module.exports = router;
