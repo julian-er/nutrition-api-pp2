@@ -10,6 +10,8 @@ export class UsersController extends BaseSQLController {
 		super(entityId);
 	}
 
+	//#region Get Methods
+	
 	/**
 	 * Gets all the users
 	 * @param {Request} _req The Express request
@@ -42,6 +44,8 @@ export class UsersController extends BaseSQLController {
 		);
 	}
 
+	//#endregion
+
 	/**
 	 * Creates a users
 	 * @param {Request} req The Express request
@@ -59,24 +63,88 @@ export class UsersController extends BaseSQLController {
 		);
 	}
 
+	//#region EDIT methods
+
 	/**
 	 * Edits a users
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
-	async editUser(req, res) {
+	editUser(req, res) {
 		const { id } = req.params;
 		const { first_name, last_name, phone_number, birth_date, profile_image, isNutritionist, isPatient } = req.body;
-       
+
 		const query = `UPDATE users SET first_name = ?, last_name = ?, phone_number = ?, birth_date = ? , profile_image = ?, isNutritionist = ?, isPatient = ? WHERE id = ?`;
 
 		this.edit(
 			query,
-			[first_name, last_name, phone_number, birth_date , profile_image, isNutritionist, isPatient, id],
+			[first_name, last_name, phone_number, birth_date, profile_image, isNutritionist, isPatient, id],
 			response => res.status(200).json(response),
 			error => res.status(500).json(error)
 		);
 	}
+
+	/**
+	 * Change Password
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
+	 */
+	changePassword(req, res) {
+		const { id } = req.params;
+		const { password } = req.body;
+
+		// TODO : Verify previous password before change it
+		const query = `UPDATE users SET password = ? WHERE id = ?`;
+
+		this.edit(
+			query,
+			[bcrypt.hashSync(password, 10), id],
+			response => res.status(200).json(response),
+			error => res.status(500).json(error)
+		);
+	}
+
+	/**
+	 * Change Mail
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
+	 */
+	changeMail(req, res) {
+		const { id } = req.params;
+		const { email } = req.body;
+
+		// TODO : Verify previous email before change it
+		const query = `UPDATE users SET email = ? WHERE id = ?`;
+
+		this.edit(
+			query,
+			[email, id],
+			response => res.status(200).json(response),
+			error => res.status(500).json(error)
+		);
+	}
+
+	/**
+	 * Change User Name
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
+	 */
+	changeMail(req, res) {
+		const { id } = req.params;
+		const { user_name } = req.body;
+
+		// TODO : Verify previous user_name before change it
+		const query = `UPDATE users SET user_name = ? WHERE id = ?`;
+
+		this.edit(
+			query,
+			[user_name, id],
+			response => res.status(200).json(response),
+			error => res.status(500).json(error)
+		);
+	}
+
+	//#endregion
 
 	/**
 	 * Deletes a users
