@@ -1,25 +1,16 @@
 import { Router } from 'express';
-import { mysqlConnection } from '../database.js';
+import { PatientsController } from '../controllers/index.js';
 
 /**
  * Sets the Patients routes
  * @param {Router} router
  */
 export function setPatientsRoutes(router) {
-	//#region GetMethods
-	router.get('/patients', (req, res) => {
-		const query = ` SELECT * FROM patients `;
+	const controller = new PatientsController();
 
-		mysqlConnection.query(query, (err, rows, fields) => {
-			if (!err) {
-				res.status(200).json(rows);
-			} else {
-				res.status(500).json({
-					message: 'Sorry we have an unespected error',
-					error: err
-				});
-			}
-		});
-	});
-	//#endregion
+	router.get('/patients', (req, res) => controller.getPatients(req, res));
+	router.get('/patients/:id', (req, res) => controller.getUserById(req, res));
+	router.post('/patients', (req, res) => controller.createUser(req, res));
+	router.put('/patients/:id', (req, res) => controller.editUser(req, res));
+	router.delete('/patients/:id', (req, res) => controller.deleteUser(req, res));
 }
