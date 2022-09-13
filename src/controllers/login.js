@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { UsersController } from './users.js';
+import { generateAccessToken } from '../services/jwt-services.js';
 
 export class LogInController extends UsersController {
 	/**
@@ -23,12 +24,12 @@ export class LogInController extends UsersController {
 				const queriedUser = user[0];
 				if (bcrypt.compareSync(password, queriedUser.password) && queriedUser.isNutritionist) {
 					res.status(200).json({
-						userData: queriedUser[0],
+						token: generateAccessToken(queriedUser),
 						message: 'Login success!'
 					});
-				} else if (!queriedUser.isNutritionist) {
+				} else if (!isNutritionist) {
 					res.status(401).json({
-						message: 'Oops! Only nutritionists can access the dashboard for now. '
+						message: `Oops! Only nutritionists can access to dashboard for now.`
 					});
 				} else {
 					res.status(401).json({
