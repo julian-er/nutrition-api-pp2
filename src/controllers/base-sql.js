@@ -14,13 +14,16 @@ import { mysqlConnection } from '../database.js';
  */
 
 export default class BaseSQLController {
-	#entityId;
+	#SingularEntityId;
+	#PluralEntityId;
 
 	/**
-	 * @param {string} entityId The entity ID
+	 * @param {string} SingularEntityId The entity ID
+	 * @param {string} PluralEntityId The entity ID
 	 */
-	constructor(entityId) {
-		this.#entityId = entityId;
+	constructor(SingularEntityId, PluralEntityId) {
+		this.#SingularEntityId = SingularEntityId;
+		this.#PluralEntityId = PluralEntityId;
 	}
 
 	/**
@@ -66,7 +69,7 @@ export default class BaseSQLController {
 	create(query, body, onSuccess, onError) {
 		mysqlConnection.query(query, body, (error, _rows, _fields) => {
 			if (!error) {
-				onSuccess({ message: `The ${this.#entityId} was created successfully` });
+				onSuccess({ message: `The ${this.#SingularEntityId} was created successfully` });
 			} else {
 				onError({ message: 'Sorry, we have an unexpected error', error: error.sqlMessage });
 			}
@@ -83,7 +86,7 @@ export default class BaseSQLController {
 	edit(query, body, onSuccess, onError) {
 		mysqlConnection.query(query, body, (error, _rows, _fields) => {
 			if (!error) {
-				onSuccess({ message: `Your ${this.#entityId} was updated successfully` });
+				onSuccess({ message: `Your ${this.#SingularEntityId} was updated successfully` });
 			} else {
 				onError({ message: 'Sorry we have an unexpected error', error: error.sqlMessage });
 			}
@@ -100,7 +103,7 @@ export default class BaseSQLController {
 	delete(query, id, onSuccess, onError) {
 		mysqlConnection.query(query, [id], (error, _rows, _fields) => {
 			if (!error) {
-				onSuccess({ message: `Your ${this.#entityId} was deleted successfully` });
+				onSuccess({ message: `Your ${this.#SingularEntityId} was deleted successfully` });
 			} else {
 				onError({ message: 'Sorry we have an unexpected error', error: err.sqlMessage });
 			}

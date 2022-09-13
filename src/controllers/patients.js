@@ -2,7 +2,7 @@ import { UsersController } from './users.js';
 
 export class PatientsController extends UsersController {
     constructor() {
-		super('patients');
+		super('patient', 'patients');
 	}
 
 	/**

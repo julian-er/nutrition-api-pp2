@@ -2,7 +2,7 @@ import { UsersController } from './users.js';
 
 export class NutritionistsController extends UsersController {
 	constructor() {
-		super('nutritionist');
+		super('nutritionist', 'nutritionists');
 	}
 
 	/**
