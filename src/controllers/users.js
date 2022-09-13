@@ -8,9 +8,9 @@ export class UsersController extends BaseSQLController {
 	 * @param {string} PluralEntityId The entity ID
 	 */
 	constructor(SingularEntityId, PluralEntityId) {
-		super(SingularEntityId, PluralEntityId);
-		this.PluralEntityId = PluralEntityId;
-		this.SingularEntityId = SingularEntityId;
+		super(SingularEntityId ?? 'user', PluralEntityId ?? 'users');
+		this.PluralEntityId = PluralEntityId ? PluralEntityId :  'users';
+		this.SingularEntityId = SingularEntityId ? SingularEntityId : 'user';
 	}
 
 	//#region Get Methods
