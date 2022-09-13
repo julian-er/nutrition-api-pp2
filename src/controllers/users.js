@@ -9,7 +9,7 @@ export class UsersController extends BaseSQLController {
 	 */
 	constructor(SingularEntityId, PluralEntityId) {
 		super(SingularEntityId ?? 'user', PluralEntityId ?? 'users');
-		this.PluralEntityId = PluralEntityId ? PluralEntityId :  'users';
+		this.PluralEntityId = PluralEntityId ? PluralEntityId : 'users';
 		this.SingularEntityId = SingularEntityId ? SingularEntityId : 'user';
 	}
 
@@ -54,26 +54,37 @@ export class UsersController extends BaseSQLController {
 	 * @param {(response: any) => void} onSuccess The success callback
 	 * @param {(error: Error) => void} onError The error callback
 	 */
-	getUserByUserName(req, res) {
-		const { user_name } = req.params;
-		const query = `SELECT * FROM users WHERE user_name = ? `;
-
-		mysqlConnection.query(query, [user_name], (error, rows, fields) => {
-			if (!error) {
-				console.log(rows)
-				if(rows.length){
-					res.status(200).json(rows)[0];
-				}else{
-					res.status(404).json({
-						message: `Sorry ${this.entityId} with username: ${user_name} not found`,
-					});
-				}
+	async getUserByUserName(req, res) {
+		const { user_name } = req;
+		const user = await this.getByUserMethod(req, res);
+		if (user) {
+			if (user.length) {
+				res.status(200).json(user)[0];
 			} else {
-				res.status(500).json({
-					message: 'Sorry we have an unexpected error',
-					error: error.sqlMessage
+				res.status(404).json({
+					message: `Sorry ${this.SingularEntityId} with username: ${user_name} not found`
 				});
 			}
+		} 
+	}
+
+	async getByUserMethod(req, res) {
+		const { user_name } = req;
+		const query = `SELECT * FROM users WHERE user_name = ? `;
+
+		return new Promise((resolve, reject) => {
+			mysqlConnection.query(query, [user_name], (error, rows, _fields) => {
+				if (!error) {
+					resolve(rows);
+				} else {
+					reject(
+						res.status(500).json({
+							message: 'Sorry we have an unexpected error',
+							error: user.sqlMessage
+						})
+					);
+				}
+			});
 		});
 	}
 
