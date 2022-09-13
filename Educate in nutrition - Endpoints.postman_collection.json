@@ -6,10 +6,10 @@
 	},
 	"item": [
 		{
-			"name": "Nutritionist",
+			"name": "Users",
 			"item": [
 				{
-					"name": "Nutritionist by ID ",
+					"name": "Users by ID",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -28,6 +28,215 @@
 					"response": []
 				},
 				{
+					"name": "Users by User Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/users/user/userTest333",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"user",
+								"userTest333"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Nutri\",\r\n    \"last_name\": \"Tionist\",\r\n    \"phone_number\": \"6578347892\",\r\n    \"birth_date\": null,\r\n    \"profile_image\": null,\r\n    \"isNutritionist\": true,\r\n    \"isPatient\": false\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8000/users/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users Change User Name",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_name\": \"ChangeUser\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8000/users/update-user/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"update-user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users Change Mail",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"updatingtestmail@gmail.com\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8000/users/update-mail/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"update-mail",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users Change Password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"1234\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8000/users/update-password/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"update-password",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users Delete by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/users/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users Creation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_name\": \"userTest\",\r\n    \"password\": \"someTestPassword\",\r\n    \"email\": \"sometestemail@gmail.com\",\r\n    \"first_name\": \"Nutri\",\r\n    \"last_name\": \"Tionist\",\r\n    \"phone_number\": \"6578347892\",\r\n    \"birth_date\": null,\r\n    \"profile_image\": null,\r\n    \"isNutritionist\": true,\r\n    \"isPatient\": false\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8000/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nutritionist",
+			"item": [
+				{
 					"name": "Nutritionists All",
 					"request": {
 						"method": "GET",
@@ -44,112 +253,31 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Patients",
+			"item": [
 				{
-					"name": "Nutritionist Update",
+					"name": "Patients All",
 					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\" : \"Matias Modificado\",\r\n    \"last_name\" :  \"Garay Modificado\"\r\n}"
-						},
-						"url": {
-							"raw": "localhost:8000/nutritionists/14",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"nutritionists",
-								"14"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Nutritionist Delete by ID",
-					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/nutritionists/17",
+							"raw": "localhost:8000/patients",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"nutritionists",
-								"17"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Nutritionist Creation",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\" : \"Pipa\",\r\n    \"last_name\" :  \"Test\",\r\n    \"user\" : \"ptest\",\r\n    \"email\" : \"ptest@gmail.com\",\r\n    \"password\" : \"1234\"\r\n}"
-						},
-						"url": {
-							"raw": "localhost:8000/nutritionists",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"nutritionists"
+								"patients"
 							]
 						}
 					},
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "Patients Creation",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "default"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Hernan\",\r\n    \"last_name\" :  \"Test\"\r\n}"
-				},
-				"url": {
-					"raw": "localhost:8000/patients",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"patients"
-					]
-				}
-			},
-			"response": []
 		},
 		{
 			"name": "Login",
