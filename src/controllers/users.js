@@ -1,17 +1,20 @@
 import bcrypt from 'bcrypt';
-import { response } from 'express';
+import { mysqlConnection } from '../database.js';
 import BaseSQLController from './base-sql.js';
 
 export class UsersController extends BaseSQLController {
 	/**
-	 * @param {string} entityId The entity ID
+	 * @param {string} SingularEntityId The entity ID
+	 * @param {string} PluralEntityId The entity ID
 	 */
-	constructor(entityId) {
-		super(entityId);
+	constructor(SingularEntityId, PluralEntityId) {
+		super(SingularEntityId, PluralEntityId);
+		this.PluralEntityId = PluralEntityId;
+		this.SingularEntityId = SingularEntityId;
 	}
 
 	//#region Get Methods
-	
+
 	/**
 	 * Gets all the users
 	 * @param {Request} _req The Express request
@@ -42,6 +45,36 @@ export class UsersController extends BaseSQLController {
 			response => res.status(200).json(response),
 			error => res.status(500).json(error)
 		);
+	}
+
+	/**
+	 * Gets an entry by user_name from any given entity
+	 * @param {string} query The SQL query
+	 * @param {string} user_name The entity user_name
+	 * @param {(response: any) => void} onSuccess The success callback
+	 * @param {(error: Error) => void} onError The error callback
+	 */
+	getUserByUserName(req, res) {
+		const { user_name } = req.params;
+		const query = `SELECT * FROM users WHERE user_name = ? `;
+
+		mysqlConnection.query(query, [user_name], (error, rows, fields) => {
+			if (!error) {
+				console.log(rows)
+				if(rows.length){
+					res.status(200).json(rows)[0];
+				}else{
+					res.status(404).json({
+						message: `Sorry ${this.entityId} with username: ${user_name} not found`,
+					});
+				}
+			} else {
+				res.status(500).json({
+					message: 'Sorry we have an unexpected error',
+					error: error.sqlMessage
+				});
+			}
+		});
 	}
 
 	//#endregion
@@ -129,7 +162,7 @@ export class UsersController extends BaseSQLController {
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
-	changeMail(req, res) {
+	changeUserName(req, res) {
 		const { id } = req.params;
 		const { user_name } = req.body;
 
