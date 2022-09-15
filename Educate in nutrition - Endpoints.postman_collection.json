@@ -14,13 +14,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/nutritionists/1",
+							"raw": "localhost:8000/users/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"nutritionists",
+								"users",
 								"1"
 							]
 						}
@@ -33,7 +33,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/users/user/userTest333",
+							"raw": "localhost:8000/users/user/ChangeUser",
 							"host": [
 								"localhost"
 							],
@@ -41,7 +41,7 @@
 							"path": [
 								"users",
 								"user",
-								"userTest333"
+								"ChangeUser"
 							]
 						}
 					},
@@ -216,16 +216,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_name\": \"userTest\",\r\n    \"password\": \"someTestPassword\",\r\n    \"email\": \"sometestemail@gmail.com\",\r\n    \"first_name\": \"Nutri\",\r\n    \"last_name\": \"Tionist\",\r\n    \"phone_number\": \"6578347892\",\r\n    \"birth_date\": null,\r\n    \"profile_image\": null,\r\n    \"isNutritionist\": true,\r\n    \"isPatient\": false\r\n}"
+							"raw": "{\r\n    \"user_name\": \"testUser\",\r\n    \"password\": \"someTestPassword\",\r\n    \"email\": \"sometestemail44@gmail.com\",\r\n    \"first_name\": \"Nutri\",\r\n    \"last_name\": \"Tionist\",\r\n    \"phone_number\": \"6578347892\",\r\n    \"birth_date\": null,\r\n    \"profile_image\": null,\r\n    \"isNutritionist\": true,\r\n    \"isPatient\": false\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8000/users",
+							"raw": "localhost:8000/users/creation",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"users"
+								"users",
+								"creation"
 							]
 						}
 					},
@@ -286,7 +287,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"pipa\",\r\n    \"password\":\"ptest\"\r\n}",
+					"raw": "{\r\n    \"user_name\":\"ChangeUser\",\r\n    \"password\":\"1234\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -294,13 +295,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/login",
+					"raw": "localhost:8000/login/ChangeUser",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
-						"login"
+						"login",
+						"ChangeUser"
 					]
 				}
 			},
