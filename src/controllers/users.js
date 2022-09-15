@@ -49,10 +49,8 @@ export class UsersController extends BaseSQLController {
 
 	/**
 	 * Gets an entry by user_name from any given entity
-	 * @param {string} query The SQL query
-	 * @param {string} user_name The entity user_name
-	 * @param {(response: any) => void} onSuccess The success callback
-	 * @param {(error: Error) => void} onError The error callback
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
 	 */
 	async getUserByUserName(req, res) {
 		const { user_name } = req;
@@ -65,9 +63,14 @@ export class UsersController extends BaseSQLController {
 					message: `Sorry ${this.SingularEntityId} with username: ${user_name} not found`
 				});
 			}
-		} 
+		}
 	}
 
+	/**
+	 * Gets an entry by user_name from any given entity
+	 * @param {Request} req The Express request need to have a user_name
+	 * @param {Response} res The Express response
+	 */
 	async getByUserMethod(req, res) {
 		const { user_name } = req;
 		const query = `SELECT * FROM users WHERE user_name = ? `;
@@ -79,7 +82,32 @@ export class UsersController extends BaseSQLController {
 				} else {
 					reject(
 						res.status(500).json({
-							message: 'Sorry we have an unexpected error',
+							message: 'Sorry we have an unexpected error trying fetch user by user name',
+							error: user.sqlMessage
+						})
+					);
+				}
+			});
+		});
+	}
+
+	/**
+	 * Gets an entry by email from any given entity
+	 * @param {Request} req The Express request need to have a email
+	 * @param {Response} res The Express response
+	 */
+	async getByEmailMethod(req, res) {
+		const query = 'SELECT * FROM users WHERE email = ?';
+		const { email } = req;
+
+		return new Promise((resolve, reject) => {
+			mysqlConnection.query(query, [email], (error, rows, _fields) => {
+				if (!error) {
+					resolve(rows);
+				} else {
+					reject(
+						res.status(500).json({
+							message: 'Sorry we have an unexpected error trying fetch user by email',
 							error: user.sqlMessage
 						})
 					);
@@ -95,16 +123,31 @@ export class UsersController extends BaseSQLController {
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
-	createUser(req, res) {
+	async createUser(req, res) {
 		const query = `INSERT INTO users ( user_name, password, email, first_name, last_name, phone_number, birth_date , profile_image, isNutritionist, isPatient) VALUES  (? , ? , ? , ? , ?, ? , ? , ? , ? , ?)`;
 		const { user_name, password, email, first_name, last_name, phone_number, birth_date, profile_image, isNutritionist, isPatient } = req.body;
 
-		this.create(
-			query,
-			[user_name, bcrypt.hashSync(password, 10), email, first_name, last_name, phone_number, birth_date, profile_image, isNutritionist, isPatient],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
-		);
+		const userByUserMethod = await this.getByUserMethod({ user_name: user_name }, res);
+		const userByEmailMethod = await this.getByEmailMethod({ email: email }, res);
+
+		if (userByUserMethod || userByEmailMethod) {
+			if (userByUserMethod && userByUserMethod.length) {
+				res.status(409).json({
+					message: 'The user name is already in use'
+				});
+			} else if (userByEmailMethod && userByEmailMethod.length) {
+				res.status(409).json({
+					message: 'The email is already in use'
+				});
+			} else {
+				this.create(
+					query,
+					[user_name, bcrypt.hashSync(password, 10), email, first_name, last_name, phone_number, birth_date, profile_image, isNutritionist, isPatient],
+					response => res.status(200).json(response),
+					error => res.status(500).json(error)
+				);
+			}
+		}
 	}
 
 	//#region EDIT methods
