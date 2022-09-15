@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "ff02b208-2ab9-45f9-85ed-201304eaf8f5",
+		"_postman_id": "d62c46d3-4bb4-47e5-b646-b1d9283ab2a7",
 		"name": "Educate in nutrition - Endpoints",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21311983"
 	},
 	"item": [
 		{
@@ -273,6 +274,57 @@
 							"port": "8000",
 							"path": [
 								"patients"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Allergies",
+			"item": [
+				{
+					"name": "Allergy Creation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"allergy_name\" :\"Celiaquía\",\r\n    \"description\" : \"La enfermedad celíaca es una afección autoinmune que daña al revestimiento del intestino delgado.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/allergies/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"allergies",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Allergy all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/allergies",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"allergies"
 							]
 						}
 					},
