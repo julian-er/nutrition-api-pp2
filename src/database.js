@@ -1,23 +1,28 @@
-const mysql = require("mysql");
-const chalk = require("chalk");
+import {createConnection} from 'mysql';
+import chalk from 'chalk';
 
 //Create connection to MySQL Server
-const mysqlConnection = mysql.createConnection({
+export const mysqlConnection = createConnection({
 	host: process.env.MYSQL_HOST,
-	user: process.env.MYSQL_ROOT_NAME, // User for yout SQL Server
-	password: process.env.MYSQL_PASSWORD, // Pasword for your SQL Server
+	user: process.env.MYSQL_ROOT_NAME, // User for your SQL Server
+	password: process.env.MYSQL_PASSWORD, // Password for your SQL Server
 	database: process.env.MYSQL_DATABASE_NAME,
+	insecureAuth: true
 });
 
-mysqlConnection.connect(function (err) {
-  if (!err) {
-    console.log("Conection to database", chalk.bgGreen("Succes!"));
-  } else {
-    console.log("Conection to database", chalk.bgRed("Fail!"));
-    console.group();
-    console.log(chalk.red("The error shown below: "));
-    console.log(err.message);
-  }
-});
+export function connectDatabase() {
+	return new Promise((resolve, reject) => {
+		mysqlConnection.connect(error => {
+			if (!error) {
+				console.log('Connection to database', chalk.bgGreen('Success!'));
+				resolve();
+			} else {
+				console.log('Connection to database', chalk.bgRed('Fail!'));
+				console.log(chalk.red('The error shown below: '));
+				reject(error);
+			}
+		});
+	});
+}
 
-module.exports = mysqlConnection; //Export module for use into other files
+//Export module for use into other files

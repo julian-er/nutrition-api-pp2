@@ -6,6 +6,7 @@ node_modules
 
 # Ignore enviroments variables
 .env
+.env-cmdrc
 
 # Ignore package-lock
 package-lock.json
