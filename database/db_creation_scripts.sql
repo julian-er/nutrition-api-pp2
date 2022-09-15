@@ -16,11 +16,12 @@ CREATE TABLE IF NOT EXISTS users (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS food(
+CREATE TABLE IF NOT EXISTS foods(
     id INT NOT NULL AUTO_INCREMENT,
     food_name VARCHAR(30) NOT NULL,
     description VARCHAR(255) DEFAULT NULL,
     photo TEXT DEFAULT NULL, /* We are using base-64 for store images */
+    portion VARCHAR(30),
 	PRIMARY KEY (id)
 );
 
@@ -34,33 +35,41 @@ CREATE TABLE IF NOT EXISTS categories(
 CREATE TABLE IF NOT EXISTS food_category(
     food_id INT NOT NULL,
     category_id INT NOT NULL,
-    FOREIGN KEY (food_id) REFERENCES food(id),
+    FOREIGN KEY (food_id) REFERENCES foods(id),
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
-CREATE TABLE IF NOT EXISTS meal(
+CREATE TABLE IF NOT EXISTS dishes(
     id INT NOT NULL AUTO_INCREMENT,
     food1_id INT NOT NULL,
     food2_id INT NOT NULL,
     food3_id INT NOT NULL,
     food4_id INT NOT NULL,
-    FOREIGN KEY (food1_id) REFERENCES food(id),
-    FOREIGN KEY (food2_id) REFERENCES food(id),
-    FOREIGN KEY (food3_id) REFERENCES food(id),
-    FOREIGN KEY (food4_id) REFERENCES food(id),
+    food5_id INT NOT NULL,
+    food6_id INT NOT NULL,
+    food7_id INT NOT NULL,
+    food8_id INT NOT NULL,
+    FOREIGN KEY (food1_id) REFERENCES foods(id),
+    FOREIGN KEY (food2_id) REFERENCES foods(id),
+    FOREIGN KEY (food3_id) REFERENCES foods(id),
+    FOREIGN KEY (food4_id) REFERENCES foods(id),
+    FOREIGN KEY (food5_id) REFERENCES foods(id),
+    FOREIGN KEY (food6_id) REFERENCES foods(id),
+    FOREIGN KEY (food7_id) REFERENCES foods(id),
+    FOREIGN KEY (food8_id) REFERENCES foods(id),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS daily_diet(
+CREATE TABLE IF NOT EXISTS daily_diets(
     id INT NOT NULL AUTO_INCREMENT,
-    meal1_id INT NOT NULL,
-    meal2_id INT NOT NULL,
-    meal3_id INT NOT NULL,
-    meal4_id INT NOT NULL,
-    FOREIGN KEY (meal1_id) REFERENCES food(id),
-    FOREIGN KEY (meal2_id) REFERENCES food(id),
-    FOREIGN KEY (meal3_id) REFERENCES food(id),
-    FOREIGN KEY (meal4_id) REFERENCES food(id),
+    dish1_id INT NOT NULL,
+    dish2_id INT NOT NULL,
+    dish3_id INT NOT NULL,
+    dish4_id INT NOT NULL,
+    FOREIGN KEY (dish1_id) REFERENCES dishes(id),
+    FOREIGN KEY (dish2_id) REFERENCES dishes(id),
+    FOREIGN KEY (dish3_id) REFERENCES dishes(id),
+    FOREIGN KEY (dish4_id) REFERENCES dishes(id),
     PRIMARY KEY (id)
 );
 
@@ -71,6 +80,7 @@ CREATE TABLE IF NOT EXISTS user_daily_diet(
     day VARCHAR(10) DEFAULT NULL,
     description VARCHAR(255) DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (daily_diet_id) REFERENCES daily_diets(id),
     PRIMARY KEY (id)
 );
 
@@ -85,7 +95,7 @@ CREATE TABLE IF NOT EXISTS allergy_excludes_food(
     allergy_id INT NOT NULL,
     food_id INT NOT NULL,
     description VARCHAR(255)DEFAULT NULL,
-    FOREIGN KEY (food_id) REFERENCES food(id),
+    FOREIGN KEY (food_id) REFERENCES foods(id),
     FOREIGN KEY (allergy_id) REFERENCES allergies(id)
 );
 
@@ -129,6 +139,9 @@ CREATE TABlE IF NOT EXISTS user_notes(
     id INT NOT NULL AUTO_INCREMENT,
     user1_id INT NOT NULL,
     user2_id INT NOT NULL /*nutritionist id*/,
+    title VARCHAR(30) NOT NULL,
+    note_date DATE NOT NULL,
+    content TEXT,
     FOREIGN KEY (user1_id) REFERENCES users(id),
     FOREIGN KEY (user2_id) REFERENCES users(id),
     PRIMARY KEY (id)
