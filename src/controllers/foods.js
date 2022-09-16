@@ -61,8 +61,8 @@ export class FoodsController extends BaseSQLController {
 	//#region POST methods
 
 	async createFood(req, res) {
-		const query = 'INSERT INTO foods (food_name, description, photo, portion_value, dish_size) VALUES(?, ?, ?, ?, ?)';
-		const { food_name, description, photo, portion_value, dish_size } = req.body;
+		const query = 'INSERT INTO foods (food_name, description, photo, food_unit) VALUES(?, ?, ?, ?, ?)';
+		const { food_name, description, photo, food_unit } = req.body;
 		const name = await this.getFoodByNameMethods(food_name);
 		if (name && name.length) {
 			res.status(409).json({
@@ -71,7 +71,7 @@ export class FoodsController extends BaseSQLController {
 		} else {
 			this.create(
 				query,
-				[food_name, description, photo, portion_value, dish_size],
+				[food_name, description, photo, food_unit],
 				response => res.status(200).json(response),
 				error => res.status(500).json(error)
 			);
@@ -89,8 +89,8 @@ export class FoodsController extends BaseSQLController {
 
 	editFood(req, res) {
 		const { id } = req.params;
-		const query = 'UPDATE foods SET food_name = ?, description= ?, photo= ?, portion_value= ? , dish_size = ? WHERE id = ?;';
-		const { food_name, description, photo, portion_value, dish_size } = req.body;
+		const query = 'UPDATE foods SET food_name = ?, description= ?, photo= ?, food_unit= ?  WHERE id = ?;';
+		const { food_name, description, photo, food_unit } = req.body;
 		this.edit(
 			query,
 			[food_name, description, photo, portion_value, dish_size, id],

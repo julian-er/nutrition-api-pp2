@@ -291,7 +291,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"allergy_name\" :\"Celiac Disease\",\r\n    \"description\" : \"Celiac disease, sometimes called celiac sprue or gluten-sensitive enteropathy, is an immune reaction to eating gluten, a protein found in wheat, barley and rye.\"\r\n}",
+							"raw": "{\r\n    \"allergy_name\" :\"Celiaquía\",\r\n    \"description\" : \"La enfermedad celíaca es una afección autoinmune que daña al revestimiento del intestino delgado.\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -336,14 +336,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/allergies/id",
+							"raw": "localhost:8000/allergies/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"allergies",
-								"id"
+								"2"
 							]
 						}
 					},
@@ -364,14 +364,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/allergies/id",
+							"raw": "localhost:8000/allergies/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"allergies",
-								"id"
+								"1"
 							]
 						}
 					},
@@ -407,7 +407,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"food_name\": \"sandia\",\r\n    \"description\": \"Citrullus lanatus, comúnmente llamada melón de agua, sandía, acendría, sindria, patilla, es una especie de la familia Cucurbitaceae. Es originaria de África con una gran presencia y difusión en todo el mundo.\",\r\n    \"photo\": \"photo\",\r\n    \"portion_value\": \"80g\",\r\n    \"dish_size\": 2\r\n}",
+							"raw": "{\r\n    \"food_name\": \"sandia\",\r\n    \"description\": \"Citrullus lanatus, comúnmente llamada melón de agua, sandía, acendría, sindria, patilla, es una especie de la familia Cucurbitaceae. Es originaria de África con una gran presencia y difusión en todo el mundo.\",\r\n    \"photo\": \"photo\",\r\n    \"food_unit\":\"g\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -435,7 +435,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"food_name\": \"watermelon\",\r\n    \"description\": \"watermelon, (Citrullus lanatus), succulent fruit and vinelike plant of the gourd family (Cucurbitaceae), native to tropical Africa and cultivated around the world.\",\r\n    \"photo\": \"photo\",\r\n    \"portion_value\": \"80g\",\r\n    \"dish_size\": 2\r\n}",
+							"raw": "{\r\n    \"food_name\": \"watermelon\",\r\n    \"description\": \"watermelon, (Citrullus lanatus), succulent fruit and vinelike plant of the gourd family (Cucurbitaceae), native to tropical Africa and cultivated around the world.\",\r\n    \"photo\": \"photo\",\r\n    \"food_unit\": \"g\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -443,14 +443,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/foods/1",
+							"raw": "localhost:8000/foods/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"foods",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -462,14 +462,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/foods/1",
+							"raw": "localhost:8000/foods/4",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"foods",
-								"1"
+								"4"
 							]
 						}
 					},
