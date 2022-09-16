@@ -99,4 +99,24 @@ export class FoodsController extends BaseSQLController {
 		);
 	}
 	//#endregion
+
+	//#region DELETE methods
+
+	/**
+	 * Deletes a food
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
+	 */
+	deleteFood(req, res) {
+		const { id } = req.params;
+		const query = `DELETE FROM foods WHERE id = ?`;
+
+		this.delete(
+			query,
+			id,
+			response => res.status(200).json(response),
+			error => res.status(500).json(error)
+		);
+	}
+	//#endregion
 }

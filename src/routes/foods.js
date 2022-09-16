@@ -11,4 +11,5 @@ export function setFoodsRoutes(router) {
 	router.get('/foods', (req, res) => controller.getFoods(req, res));
 	router.post('/foods/create', (req, res) => controller.createFood(req, res));
 	router.put('/foods/:id', (req, res) => controller.editFood(req, res));
+	router.delete('/foods/:id', (req, res) => controller.deleteFood(req, res));
 }
