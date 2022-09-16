@@ -15,6 +15,12 @@ export class FoodsController extends BaseSQLController {
 
 	//#region get methods
 
+	/**
+	 * Gets all foods
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
+	 */
+
 	getFoods(_req, res) {
 		const query = `SELECT * FROM foods`;
 		this.getAll(
@@ -46,7 +52,13 @@ export class FoodsController extends BaseSQLController {
 
 	//#endregion
 
-	//#region edit methods
+	/**
+	 * Creates a food
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
+	 */
+
+	//#region POST methods
 
 	async createFood(req, res) {
 		const query = 'INSERT INTO foods (food_name, description, photo, portion_value, dish_size) VALUES(?, ?, ?, ?, ?)';
@@ -65,4 +77,26 @@ export class FoodsController extends BaseSQLController {
 			);
 		}
 	}
+
+	//#endregion
+
+	//#region edit methods
+	/**
+	 * Edits a food
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
+	 */
+
+	editFood(req, res) {
+		const { id } = req.params;
+		const query = 'UPDATE foods SET food_name = ?, description= ?, photo= ?, portion_value= ? , dish_size = ? WHERE id = ?;';
+		const { food_name, description, photo, portion_value, dish_size } = req.body;
+		this.edit(
+			query,
+			[food_name, description, photo, portion_value, dish_size, id],
+			response => res.status(200).json(response),
+			error => res.status(500).json(error)
+		);
+	}
+	//#endregion
 }
