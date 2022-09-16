@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS foods(
     food_name VARCHAR(30) NOT NULL,
     description VARCHAR(255) DEFAULT NULL,
     photo TEXT DEFAULT NULL, /* We are using base-64 for store images */
-    portion VARCHAR(30),
+    portion_value VARCHAR(30), /* how much one portion equals in units  (grams, mililiters, etc) */
+    dish_size INT,  /* how many spaces the food occupies in the dish */
 	PRIMARY KEY (id)
 );
 
@@ -41,14 +42,14 @@ CREATE TABLE IF NOT EXISTS food_category(
 
 CREATE TABLE IF NOT EXISTS dishes(
     id INT NOT NULL AUTO_INCREMENT,
-    food1_id INT NOT NULL,
-    food2_id INT NOT NULL,
-    food3_id INT NOT NULL,
-    food4_id INT NOT NULL,
-    food5_id INT NOT NULL,
-    food6_id INT NOT NULL,
-    food7_id INT NOT NULL,
-    food8_id INT NOT NULL,
+    food1_id INT DEFAULT NULL,
+    food2_id INT DEFAULT NULL,
+    food3_id INT DEFAULT NULL,
+    food4_id INT DEFAULT NULL,
+    food5_id INT DEFAULT NULL,
+    food6_id INT DEFAULT NULL,
+    food7_id INT DEFAULT NULL,
+    food8_id INT DEFAULT NULL,
     FOREIGN KEY (food1_id) REFERENCES foods(id),
     FOREIGN KEY (food2_id) REFERENCES foods(id),
     FOREIGN KEY (food3_id) REFERENCES foods(id),

@@ -60,7 +60,7 @@ export class AllergiesController extends BaseSQLController {
 
 		if (allergyByAllergyName && allergyByAllergyName.length) {
 			res.status(409).json({
-				message: 'The allergy name is already in use'
+				message: 'The allergy already exists'
 			});
 		} else {
 			this.create(
@@ -70,5 +70,41 @@ export class AllergiesController extends BaseSQLController {
 				error => res.status(500).json(error)
 			);
 		}
+	}
+
+	/**
+	 * Edits an allergy
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
+	 */
+
+	editAllergy(req, res) {
+		const { id } = req.params;
+		const query = 'UPDATE allergies SET allergy_name = ?, description= ? WHERE id = ?;';
+		const { allergy_name, description } = req.body;
+		this.edit(
+			query,
+			[allergy_name, description, id],
+			response => res.status(200).json(response),
+			error => res.status(500).json(error)
+		);
+	}
+
+	/**
+	 * Deletes an allergy
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
+	 */
+
+	deleteAllergy(req, res) {
+		const { id } = req.params;
+		const query = `DELETE FROM allergies WHERE id = ?`;
+
+		this.delete(
+			query,
+			id,
+			response => res.status(200).json(response),
+			error => res.status(500).json(error)
+		);
 	}
 }
