@@ -30,16 +30,16 @@ CREATE TABLE IF NOT EXISTS units (
     unit_name VARCHAR(30) NOT NULL,
     description VARCHAR(255) DEFAULT NULL,
     PRIMARY KEY (id)
-)
+);
 
-CREATE TABLE IF NOT EXIST food_unit(
+CREATE TABLE IF NOT EXISTS food_unit(
     id INT NOT NULL AUTO_INCREMENT,
     food_id INT NOT NULL,
     unit_id INT NOT NULL,
     PRIMARY KEY(ID),
-    FOREIGN KEY(food_id) REFERENCES foods(food_id)
-    FOREIGN KEY(unit_id) REFERENCES units(food_id)
-)
+    FOREIGN KEY(food_id) REFERENCES foods(id),
+    FOREIGN KEY(unit_id) REFERENCES units(id)
+);
 
 CREATE TABLE IF NOT EXISTS categories(
     id INT NOT NULL AUTO_INCREMENT,
@@ -57,9 +57,9 @@ CREATE TABLE IF NOT EXISTS food_category(
 
 CREATE TABLE IF NOT EXISTS dishes(
     id INT NOT NULL AUTO_INCREMENT,
-    dish_name,
+    dish_name VARCHAR(120),
     dish_size INT,  
-    units_total INT,
+    units_total VARCHAR(30),
     description VARCHAR(255),
     food1_id INT DEFAULT NULL,
     food2_id INT DEFAULT NULL,

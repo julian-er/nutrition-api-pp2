@@ -61,7 +61,7 @@ export class FoodsController extends BaseSQLController {
 	//#region POST methods
 
 	async createFood(req, res) {
-		const query = 'INSERT INTO foods (food_name, description, photo, food_unit) VALUES(?, ?, ?, ?, ?)';
+		const query = 'INSERT INTO foods (food_name, description, photo, food_unit) VALUES(?, ?, ?, ?)';
 		const { food_name, description, photo, food_unit } = req.body;
 		const name = await this.getFoodByNameMethods(food_name);
 		if (name && name.length) {
