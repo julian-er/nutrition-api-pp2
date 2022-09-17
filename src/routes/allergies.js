@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { AllergiesController } from '../controllers/index.js';
 
 /**
- * Sets the Patients routes
+ * Sets the Allergies routes
  * @param {Router} router
  */
 export function setAllergiesRoutes(router) {

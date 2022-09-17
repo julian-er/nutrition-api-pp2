@@ -1,29 +1,19 @@
-
 import { mysqlConnection } from '../database.js';
 import BaseSQLController from './base-sql.js';
 
-
 export class AllergiesController extends BaseSQLController {
-    /**
+	/**
 	 * @param {string} SingularEntityId The entity ID
 	 * @param {string} PluralEntityId The entity ID
 	 */
 	constructor(SingularEntityId, PluralEntityId) {
-		super(SingularEntityId ?? 'allergy', PluralEntityId ?? 'allergies');
+		super(SingularEntityId ?? 'alergy', PluralEntityId ?? 'allergies');
 		this.PluralEntityId = PluralEntityId ? PluralEntityId : 'allergies';
 		this.SingularEntityId = SingularEntityId ? SingularEntityId : 'allergy';
 	}
 
-    //#region Get Methods
-
-	/**
-	 * Gets all the Allergies
-	 * @param {Request} _req The Express request
-	 * @param {Response} res The Express response
-	 */
 	getAllergies(_req, res) {
 		const query = `SELECT * FROM allergies`;
-
 		this.getAll(
 			query,
 			response => res.status(200).json(response),
@@ -31,26 +21,14 @@ export class AllergiesController extends BaseSQLController {
 		);
 	}
 
-
-    /**
-	 * Gets a Patolofy by ID
-	 * @param {Request} req The Express request
+	/**
+	 * Gets an entry by name from any given entity
+	 * @param {Request} req The Express request need to have a email
 	 * @param {Response} res The Express response
 	 */
-	getAllergyById(req, res) {
-		const query = `SELECT * FROM allergy WHERE id = ? `;
-		const { id } = req.params; // Also you can use this other notation req.params.id to see the param
 
-		this.getById(
-			query,
-			id,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
-		);
-	}
-
-    async getAllergyByNameMethods(req, res) {
-		const query = 'SELECT * FROM allergies WHERE allergy_name= ?';
+	async getByAllergyNameMethod(req, res) {
+		const query = 'SELECT * FROM allergies WHERE allergy_name = ?';
 		const { allergy_name } = req;
 
 		return new Promise((resolve, reject) => {
@@ -60,52 +38,50 @@ export class AllergiesController extends BaseSQLController {
 				} else {
 					reject(
 						res.status(500).json({
-							message: 'Sorry we have an unexpected error trying fetch allergy by name',
+							message: 'Sorry we have an unexpected error trying fetch allergy name',
 							error: user.sqlMessage
 						})
 					);
 				}
 			});
 		});
-    }
+	}
 
+	/**
+	 * Creates an allergy
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
+	 */
 
-        /**
-	    * Creates a Allergy
-	    * @param {Request} req The Express request
-	    * @param {Response} res The Express response
-	    */
 	async createAllergy(req, res) {
 		const query = `INSERT INTO allergies ( allergy_name, description) VALUES  (?, ?)`;
 		const { allergy_name, description } = req.body;
-        const name = await this.getAllergyByNameMethods({ allergy_name: allergy_name }, res);
-		if (name && name.length) {
+		const allergyByAllergyName = await this.getByAllergyNameMethod({ allergy_name: allergy_name }, res);
+
+		if (allergyByAllergyName && allergyByAllergyName.length) {
 			res.status(409).json({
 				message: 'The allergy already exists'
 			});
 		} else {
-					this.create(
-					query,
-					[allergy_name, description],
-					response => res.status(200).json(response),
-					error => res.status(500).json(error)
-				);
-        }
-    }
-
-    	//#region EDIT methods
+			this.create(
+				query,
+				[allergy_name, description],
+				response => res.status(200).json(response),
+				error => res.status(500).json(error)
+			);
+		}
+	}
 
 	/**
-	 * Edits a users
+	 * Edits an allergy
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
+
 	editAllergy(req, res) {
 		const { id } = req.params;
+		const query = 'UPDATE allergies SET allergy_name = ?, description= ? WHERE id = ?;';
 		const { allergy_name, description } = req.body;
-
-		const query = `UPDATE allergies SET  allergy_name = ?, description = ?  WHERE id = ?`;
-
 		this.edit(
 			query,
 			[allergy_name, description, id],
@@ -114,11 +90,12 @@ export class AllergiesController extends BaseSQLController {
 		);
 	}
 
-    /**
-	 * Deletes a users
+	/**
+	 * Deletes an allergy
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
+
 	deleteAllergy(req, res) {
 		const { id } = req.params;
 		const query = `DELETE FROM allergies WHERE id = ?`;
@@ -130,5 +107,4 @@ export class AllergiesController extends BaseSQLController {
 			error => res.status(500).json(error)
 		);
 	}
-
-}  
+}
