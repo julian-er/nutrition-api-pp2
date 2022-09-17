@@ -4,4 +4,4 @@ export * from './patients.js';
 export * from './nutritionists.js';
 export * from './patologies.js';
 export * from './allergies.js';
-
+export * from './daily_diets.js';
