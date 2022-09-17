@@ -3,6 +3,9 @@ import { setLogInRoutes } from './login.js';
 import { setNutritionistsRoutes } from './nutritionists.js';
 import { setPatientsRoutes } from './patients.js';
 import { setUserRoutes } from './users.js';
+import { setAllergiesRoutes } from './allergies.js';
+import { setFoodsRoutes } from './foods.js';
+import { setDishesRoutes } from './dishes.js';
 
 const router = Router();
 
@@ -11,5 +14,8 @@ export function setRouter() {
 	setPatientsRoutes(router);
 	setUserRoutes(router);
 	setLogInRoutes(router);
+	setAllergiesRoutes(router);
+	setFoodsRoutes(router);
+	setDishesRoutes(router);
 	return router;
 }

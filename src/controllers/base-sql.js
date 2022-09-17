@@ -105,7 +105,7 @@ export default class BaseSQLController {
 			if (!error) {
 				onSuccess({ message: `Your ${this.#SingularEntityId} was deleted successfully` });
 			} else {
-				onError({ message: 'Sorry we have an unexpected error', error: err.sqlMessage });
+				onError({ message: 'Sorry we have an unexpected error', error: error.sqlMessage });
 			}
 		});
 	}
