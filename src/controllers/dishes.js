@@ -49,8 +49,7 @@ export class DishesController extends BaseSQLController {
 	 */
 
 	createDish(req, res) {
-		const query =
-			'INSERT INTO dishes (dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)';
+		const query ='INSERT INTO dishes (dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)';
 		const { dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id } = req.body;
 		this.create(
 			query,
@@ -69,8 +68,7 @@ export class DishesController extends BaseSQLController {
 	 */
 	editDish(req, res) {
 		const { id } = req.params;
-		const query =
-			'UPDATE dishes SET dish_name=?, dish_size=?, units_total=?, description=?, food1_id=?, food2_id=?, food3_id=?, food4_id=?, food5_id=?, food6_id=?, food7_id=?, food8_id=?  WHERE id = ?;';
+		const query ='UPDATE dishes SET dish_name=?, dish_size=?, units_total=?, description=?, food1_id=?, food2_id=?, food3_id=?, food4_id=?, food5_id=?, food6_id=?, food7_id=?, food8_id=?  WHERE id = ?;';
 		const { dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id } = req.body;
 		this.edit(
 			query,
