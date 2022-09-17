@@ -2,7 +2,7 @@ export * from './users.js';
 export * from './login.js';
 export * from './patients.js';
 export * from './nutritionists.js';
-export * from './patologies.js';
+export * from './pathologies.js';
 export * from './allergies.js';
 export * from './daily_diets.js';
 export * from './foods.js';

@@ -3,7 +3,7 @@ import { setLogInRoutes } from './login.js';
 import { setNutritionistsRoutes } from './nutritionists.js';
 import { setPatientsRoutes } from './patients.js';
 import { setUserRoutes } from './users.js';
-import { setPatologiesRoutes } from './patologies.js';
+import { setPathologiesRoutes } from './pathologies.js';
 import { setDailyDietsRoutes } from './daily_diets.js';
 import { setAllergiesRoutes } from './allergies.js';
 import { setFoodsRoutes } from './foods.js';
@@ -16,7 +16,7 @@ export function setRouter() {
 	setPatientsRoutes(router);
 	setUserRoutes(router);
 	setLogInRoutes(router);
-	setPatologiesRoutes(router);
+	setPathologiesRoutes(router);
 	setAllergiesRoutes(router)
 	setDailyDietsRoutes(router);
 	setFoodsRoutes(router);
