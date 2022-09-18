@@ -73,6 +73,10 @@ export class DietsController extends BaseSQLController {
 		});
     }
 
+	//#endregion
+
+	 //#region Create Methods
+
     /**
 	* Creates a Diet
 	* @param {Request} req The Express request
@@ -90,6 +94,8 @@ export class DietsController extends BaseSQLController {
 				rror => res.status(500).json(error)
 			);
     }
+
+	//#endregion
 
     //#region EDIT methods
 
@@ -112,6 +118,10 @@ export class DietsController extends BaseSQLController {
 		);
 	}
 
+	//#endregion
+
+	//#region DELETE Methods
+
     /**
 	 * Deletes a Diet
 	 * @param {Request} req The Express request
@@ -129,8 +139,6 @@ export class DietsController extends BaseSQLController {
 		);
 	}
 
-    
-
-
-
+	//#endregion
+  
 }

@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { DietsController } from '../controllers/index.js';
 
 /**
- * Sets the Patients routes
+ * Sets the Diets routes
  * @param {Router} router
  */
 export function setDietsRoutes(router) {
