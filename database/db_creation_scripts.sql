@@ -3,14 +3,14 @@ USE db_nutrition;
 
 CREATE TABLE IF NOT EXISTS users (
     id INT NOT NULL AUTO_INCREMENT,
-    user_name VARCHAR(20) DEFAULT NULL,
+    user_name VARCHAR(20) NOT NULL,
     password VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    first_name VARCHAR(35) DEFAULT NULL,
-    last_name VARCHAR(30) DEFAULT NULL,
-    phone_number VARCHAR (45) NOT NULL,
+    first_name VARCHAR(35) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    phone_number VARCHAR (45) DEFAULT NULL,
     birth_date DATE,
-    profile_image TEXT, /* We are using base-64 for store images */
+    profile_image TEXT DEFAULT NULL, /* We are using base-64 for store images */
     isNutritionist BOOLEAN DEFAULT false,
     isPatient BOOLEAN DEFAULT false,
     PRIMARY KEY (id)
@@ -127,18 +127,18 @@ CREATE TABLE IF NOT EXISTS user_allergy(
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE IF NOT EXISTS patologies(
+CREATE TABLE IF NOT EXISTS pathologies(
     id INT NOT NULL AUTO_INCREMENT,
-    patology_name VARCHAR(255) NOT NULL,
+    pathology_name VARCHAR(200) NOT NULL
     description VARCHAR(255) DEFAULT NULL,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS user_patology(
-    patology_id INT NOT NULL,
+CREATE TABLE IF NOT EXISTS user_pathology(
+    pathology_id INT NOT NULL,
     user_id INT NOT NULL,
     description VARCHAR(255)DEFAULT NULL,
-    FOREIGN KEY (patology_id) REFERENCES patologies(id),
+    FOREIGN KEY (pathology_id) REFERENCES pathologies(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS user_diet(
 CREATE TABlE IF NOT EXISTS user_notes(
     id INT NOT NULL AUTO_INCREMENT,
     user1_id INT NOT NULL,
-    user2_id INT NOT NULL ,
+    user2_id INT NOT NULL /*nutritionist id*/,
     title VARCHAR(30) NOT NULL,
     note_date DATE NOT NULL,
     content TEXT,
@@ -167,4 +167,3 @@ CREATE TABlE IF NOT EXISTS user_notes(
     FOREIGN KEY (user2_id) REFERENCES users(id),
     PRIMARY KEY (id)
 );
-

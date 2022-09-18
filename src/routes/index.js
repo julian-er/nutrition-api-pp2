@@ -5,6 +5,8 @@ import { setPatientsRoutes } from './patients.js';
 import { setUserRoutes } from './users.js';
 import { setPatologiesRoutes } from './patologies.js';
 import { setAllergiesRoutes } from './allergies.js';
+import { setFoodsRoutes } from './foods.js';
+import { setDishesRoutes } from './dishes.js';
 
 const router = Router();
 
@@ -15,5 +17,7 @@ export function setRouter() {
 	setLogInRoutes(router);
 	setPatologiesRoutes(router);
 	setAllergiesRoutes(router)
+	setFoodsRoutes(router);
+	setDishesRoutes(router);
 	return router;
 }

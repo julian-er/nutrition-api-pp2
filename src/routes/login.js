@@ -8,5 +8,5 @@ import { LogInController } from '../controllers/index.js';
 export function setLogInRoutes(router) {
 	const controller = new LogInController();
 
-	router.post('/login/:user_name', (req, res) => controller.logIn(req.body, res));
+	router.post('/login', (req, res) => controller.logIn(req.body, res));
 }

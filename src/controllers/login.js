@@ -24,21 +24,33 @@ export class LogInController extends UsersController {
 				const queriedUser = user[0];
 				if (bcrypt.compareSync(password, queriedUser.password) && queriedUser.isNutritionist) {
 					res.status(200).json({
+						success: true,
+						message: 'Login success!',
+						httpStatusCode: 200,
 						token: generateAccessToken(queriedUser),
-						message: 'Login success!'
+						response: queriedUser[0]
 					});
-				} else if (!isNutritionist) {
+				} else if (!queriedUser.isNutritionist) {
 					res.status(401).json({
-						message: `Oops! Only nutritionists can access to dashboard for now.`
+						success: false,
+						message: 'Oops! Only nutritionists can access to dashboard for now.',
+						httpStatusCode: 401,
+						response: []
 					});
 				} else {
 					res.status(401).json({
-						message: `Incorrect password`
+						success: false,
+						message: 'Incorrect password',
+						httpStatusCode: 401,
+						response: []
 					});
 				}
 			} else {
 				res.status(404).json({
-					message: `Sorry ${this.SingularEntityId} with username: ${user_name} not found`
+					success: false,
+					message: `Sorry ${this.SingularEntityId} with username: ${user_name} not found`,
+					httpStatusCode: 404,
+					response: []
 				});
 			}
 		}

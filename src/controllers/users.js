@@ -25,8 +25,20 @@ export class UsersController extends BaseSQLController {
 
 		this.getAll(
 			query,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
@@ -42,28 +54,21 @@ export class UsersController extends BaseSQLController {
 		this.getById(
 			query,
 			id,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: '',
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
-	}
-
-	/**
-	 * Gets an entry by user_name from any given entity
-	 * @param {Request} req The Express request
-	 * @param {Response} res The Express response
-	 */
-	async getUserByUserName(req, res) {
-		const { user_name } = req;
-		const user = await this.getByUserMethod(req, res);
-		if (user) {
-			if (user.length) {
-				res.status(200).json(user)[0];
-			} else {
-				res.status(404).json({
-					message: `Sorry ${this.SingularEntityId} with username: ${user_name} not found`
-				});
-			}
-		}
 	}
 
 	/**
@@ -82,8 +87,10 @@ export class UsersController extends BaseSQLController {
 				} else {
 					reject(
 						res.status(500).json({
+							success: false,
 							message: 'Sorry we have an unexpected error trying fetch user by user name',
-							error: user.sqlMessage
+							httpStatusCode: 500,
+							response: error.sqlMessage
 						})
 					);
 				}
@@ -107,13 +114,42 @@ export class UsersController extends BaseSQLController {
 				} else {
 					reject(
 						res.status(500).json({
-							message: 'Sorry we have an unexpected error trying fetch user by email',
-							error: user.sqlMessage
+							success: false,
+							message: 'Sorry we have an unexpected error trying fetch user by user email',
+							httpStatusCode: 500,
+							response: error.sqlMessage
 						})
 					);
 				}
 			});
 		});
+	}
+
+	/**
+	 * Gets an entry by user_name from any given entity
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
+	 */
+	async getUserByUserName(req, res) {
+		const { user_name } = req;
+		const user = await this.getByUserMethod(req, res);
+		if (user) {
+			if (user.length) {
+				res.status(200).json({
+					success: true,
+					message: '',
+					httpStatusCode: 200,
+					response: user[0]
+				});
+			} else {
+				res.status(404).json({
+					success: false,
+					message: `Sorry ${this.SingularEntityId} with username: ${user_name} not found`,
+					httpStatusCode: 404,
+					response: user
+				});
+			}
+		}
 	}
 
 	//#endregion
@@ -133,18 +169,36 @@ export class UsersController extends BaseSQLController {
 		if (userByUserMethod || userByEmailMethod) {
 			if (userByUserMethod && userByUserMethod.length) {
 				res.status(409).json({
-					message: 'The user name is already in use'
+					success: false,
+					message: 'The user name is already in use',
+					httpStatusCode: 409,
+					response: []
 				});
 			} else if (userByEmailMethod && userByEmailMethod.length) {
 				res.status(409).json({
-					message: 'The email is already in use'
+					success: false,
+					message: 'The email name is already in use',
+					httpStatusCode: 409,
+					response: []
 				});
 			} else {
 				this.create(
 					query,
 					[user_name, bcrypt.hashSync(password, 10), email, first_name, last_name, phone_number, birth_date, profile_image, isNutritionist, isPatient],
-					response => res.status(200).json(response),
-					error => res.status(500).json(error)
+					response =>
+						res.status(200).json({
+							success: true,
+							message: response.message,
+							httpStatusCode: 200,
+							response: []
+						}),
+					error =>
+						res.status(500).json({
+							success: false,
+							message: error.message,
+							httpStatusCode: 500,
+							response: error.error
+						})
 				);
 			}
 		}
@@ -166,8 +220,20 @@ export class UsersController extends BaseSQLController {
 		this.edit(
 			query,
 			[first_name, last_name, phone_number, birth_date, profile_image, isNutritionist, isPatient, id],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
@@ -186,8 +252,20 @@ export class UsersController extends BaseSQLController {
 		this.edit(
 			query,
 			[bcrypt.hashSync(password, 10), id],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
@@ -206,8 +284,20 @@ export class UsersController extends BaseSQLController {
 		this.edit(
 			query,
 			[email, id],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
@@ -226,8 +316,20 @@ export class UsersController extends BaseSQLController {
 		this.edit(
 			query,
 			[user_name, id],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
@@ -245,8 +347,20 @@ export class UsersController extends BaseSQLController {
 		this.delete(
 			query,
 			id,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 }
