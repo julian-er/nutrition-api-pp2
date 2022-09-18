@@ -1,5 +1,6 @@
 import express from 'express';
 import chalk from 'chalk';
+import cors from 'cors';
 import { setRouter } from './routes/index.js';
 import { connectDatabase } from './database.js';
 
@@ -13,6 +14,8 @@ connectDatabase()
 		app
 			//Middleware
 			.use(express.json()) // use JSON format
+			//CORS
+			.use(cors()) //allow cors from any origins
 			//Routes
 			.use('/', router)
 			//Start Server
