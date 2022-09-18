@@ -191,14 +191,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/users/7",
+							"raw": "localhost:8000/users/delete/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"users",
-								"7"
+								"delete",
+								"1"
 							]
 						}
 					},
@@ -220,14 +221,14 @@
 							"raw": "{\r\n    \"user_name\": \"testUser\",\r\n    \"password\": \"someTestPassword\",\r\n    \"email\": \"sometestemail44@gmail.com\",\r\n    \"first_name\": \"Nutri\",\r\n    \"last_name\": \"Tionist\",\r\n    \"phone_number\": \"6578347892\",\r\n    \"birth_date\": null,\r\n    \"profile_image\": null,\r\n    \"isNutritionist\": true,\r\n    \"isPatient\": false\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8000/users/creation",
+							"raw": "localhost:8000/users/create",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"users",
-								"creation"
+								"create"
 							]
 						}
 					},
@@ -336,13 +337,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/allergies/2",
+							"raw": "localhost:8000/allergies/delete/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"allergies",
+								"delete",
 								"2"
 							]
 						}
@@ -364,14 +366,34 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/allergies/1",
+							"raw": "localhost:8000/allergies/update/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"allergies",
-								"1"
+								"update",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Allergy by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/allergies/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"allergies",
+								"2"
 							]
 						}
 					},
@@ -407,7 +429,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n{\r\n    \"food_name\": \"sandia\",\r\n    \"description\": \"Citrullus lanatus, comúnmente llamada melón de agua, sandía, acendría, sindria, patilla, es una especie de la familia Cucurbitaceae. Es originaria de África con una gran presencia y difusión en todo el mundo.\",\r\n    \"photo\": \"photo\",\r\n    \"food_unit\":\"g\"\r\n}\r\n\r\n{\r\n    \"food_name\": \"meat\",\r\n    \"description\": \"Meat is mainly composed of water, protein, and fat. It is edible raw, but is normally eaten after it has been cooked and seasoned or processed in a variety of ways. Unprocessed meat will spoil or rot within hours or days as a result of infection with, and decomposition by, bacteria and fungi.\",\r\n    \"photo\": \"photo\",\r\n    \"food_unit\":\"g\"\r\n},\r\n{\r\n    \"food_name\": \"egg\",\r\n    \"description\": \"An egg is an organic vessel grown by an animal to carry a possibly fertilized egg cell (a zygote) and to incubate from it an embryo within the egg until the embryo has become an animal fetus that can survive on its own, at which point the animal hatches.\",\r\n    \"photo\": \"photo\",\r\n    \"food_unit\":\"g\"\r\n}\r\n]\r\n",
+							"raw": "\r\n{\r\n    \"food_name\": \"sandia\",\r\n    \"description\": \"Citrullus lanatus, comúnmente llamada melón de agua, sandía, acendría, sindria, patilla, es una especie de la familia Cucurbitaceae. Es originaria de África con una gran presencia y difusión en todo el mundo.\",\r\n    \"photo\": \"photo\",\r\n    \"food_unit\":\"g\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -435,7 +457,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"food_name\": \"watermelon\",\r\n    \"description\": \"watermelon, (Citrullus lanatus), succulent fruit and vinelike plant of the gourd family (Cucurbitaceae), native to tropical Africa and cultivated around the world.\",\r\n    \"photo\": \"photo\",\r\n    \"food_unit\": \"g\"\r\n}",
+							"raw": "{\r\n    \"food_name\": \"watermelon\",\r\n    \"description\": \"watermelon, (Citrullus lanatus), succulent fruit and vinelike plant of the gourd family (Cucurbitaceae), native to tropical Africa and cultivated around the world.\",\r\n    \"photo\": \"laskgplasm\",\r\n    \"food_unit\": \"g\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -443,13 +465,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/foods/2",
+							"raw": "localhost:8000/foods/update/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"foods",
+								"update",
 								"2"
 							]
 						}
@@ -462,42 +485,34 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/foods/4",
+							"raw": "localhost:8000/foods/delete/12",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"foods",
-								"4"
+								"delete",
+								"12"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "Food by ID",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n    \"food_name\": \"meat\",\r\n    \"description\": \"Meat is mainly composed of water, protein, and fat. It is edible raw, but is normally eaten after it has been cooked and seasoned or processed in a variety of ways. Unprocessed meat will spoil or rot within hours or days as a result of infection\",\r\n    \"photo\": \"photo\",\r\n    \"food_unit\":\"g\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8000/foods/create",
+							"raw": "localhost:8000/foods/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"foods",
-								"create"
+								"2"
 							]
 						}
 					},
@@ -532,14 +547,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/dishes/2",
+							"raw": "localhost:8000/dishes/4",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"dishes",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -576,8 +591,20 @@
 				{
 					"name": "Dish Delete",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/dishes/delete/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"dishes",
+								"delete",
+								"2"
+							]
+						}
 					},
 					"response": []
 				}

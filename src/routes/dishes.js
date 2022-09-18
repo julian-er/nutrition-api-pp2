@@ -11,6 +11,6 @@ export function setDishesRoutes(router) {
 	router.get('/dishes', (req, res) => controller.getDishes(req, res));
 	router.get('/dishes/:id', (req, res) => controller.getDishById(req, res));
 	router.post('/dishes/create', (req, res) => controller.createDish(req, res));
-	router.put('/dishes/:id', (req, res) => controller.editDish(req, res));
-	router.delete('/dishes/:id', (req, res) => controller.deleteDish(req, res));
+	router.put('/dishes/update/:id', (req, res) => controller.editDish(req, res));
+	router.delete('/dishes/delete/:id', (req, res) => controller.deleteDish(req, res));
 }
