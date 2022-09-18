@@ -57,7 +57,7 @@ export class UsersController extends BaseSQLController {
 			response =>
 				res.status(200).json({
 					success: true,
-					message: response.message,
+					message: '',
 					httpStatusCode: 200,
 					response: response
 				}),
@@ -69,33 +69,6 @@ export class UsersController extends BaseSQLController {
 					response: error.error
 				})
 		);
-	}
-
-	/**
-	 * Gets an entry by user_name from any given entity
-	 * @param {Request} req The Express request
-	 * @param {Response} res The Express response
-	 */
-	async getUserByUserName(req, res) {
-		const { user_name } = req;
-		const user = await this.getByUserMethod(req, res);
-		if (user) {
-			if (user.length) {
-				res.status(200).json({
-					success: true,
-					message: response.message,
-					httpStatusCode: 200,
-					response: user[0]
-				});
-			} else {
-				res.status(404).json({
-					success: false,
-					message: `Sorry ${this.SingularEntityId} with username: ${user_name} not found`,
-					httpStatusCode: 404,
-					response: user
-				});
-			}
-		}
 	}
 
 	/**
@@ -152,6 +125,33 @@ export class UsersController extends BaseSQLController {
 		});
 	}
 
+	/**
+	 * Gets an entry by user_name from any given entity
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
+	 */
+	async getUserByUserName(req, res) {
+		const { user_name } = req;
+		const user = await this.getByUserMethod(req, res);
+		if (user) {
+			if (user.length) {
+				res.status(200).json({
+					success: true,
+					message: '',
+					httpStatusCode: 200,
+					response: user[0]
+				});
+			} else {
+				res.status(404).json({
+					success: false,
+					message: `Sorry ${this.SingularEntityId} with username: ${user_name} not found`,
+					httpStatusCode: 404,
+					response: user
+				});
+			}
+		}
+	}
+
 	//#endregion
 
 	/**
@@ -190,7 +190,7 @@ export class UsersController extends BaseSQLController {
 							success: true,
 							message: response.message,
 							httpStatusCode: 200,
-							response: response
+							response: []
 						}),
 					error =>
 						res.status(500).json({
@@ -225,7 +225,7 @@ export class UsersController extends BaseSQLController {
 					success: true,
 					message: response.message,
 					httpStatusCode: 200,
-					response: response
+					response: []
 				}),
 			error =>
 				res.status(500).json({
@@ -257,7 +257,7 @@ export class UsersController extends BaseSQLController {
 					success: true,
 					message: response.message,
 					httpStatusCode: 200,
-					response: response
+					response: []
 				}),
 			error =>
 				res.status(500).json({
@@ -289,7 +289,7 @@ export class UsersController extends BaseSQLController {
 					success: true,
 					message: response.message,
 					httpStatusCode: 200,
-					response: response
+					response: []
 				}),
 			error =>
 				res.status(500).json({
@@ -321,7 +321,7 @@ export class UsersController extends BaseSQLController {
 					success: true,
 					message: response.message,
 					httpStatusCode: 200,
-					response: response
+					response: []
 				}),
 			error =>
 				res.status(500).json({
@@ -352,7 +352,7 @@ export class UsersController extends BaseSQLController {
 					success: true,
 					message: response.message,
 					httpStatusCode: 200,
-					response: response
+					response: []
 				}),
 			error =>
 				res.status(500).json({
