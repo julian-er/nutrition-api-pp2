@@ -24,8 +24,20 @@ export class DishesController extends BaseSQLController {
 		const query = `SELECT * FROM dishes`;
 		this.getAll(
 			query,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
@@ -35,8 +47,20 @@ export class DishesController extends BaseSQLController {
 		this.getById(
 			query,
 			[id],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 	//#endregion
@@ -49,13 +73,26 @@ export class DishesController extends BaseSQLController {
 	 */
 
 	createDish(req, res) {
-		const query ='INSERT INTO dishes (dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)';
+		const query =
+			'INSERT INTO dishes (dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)';
 		const { dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id } = req.body;
 		this.create(
 			query,
 			[dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 	//#endregion
@@ -68,13 +105,26 @@ export class DishesController extends BaseSQLController {
 	 */
 	editDish(req, res) {
 		const { id } = req.params;
-		const query ='UPDATE dishes SET dish_name=?, dish_size=?, units_total=?, description=?, food1_id=?, food2_id=?, food3_id=?, food4_id=?, food5_id=?, food6_id=?, food7_id=?, food8_id=?  WHERE id = ?;';
+		const query =
+			'UPDATE dishes SET dish_name=?, dish_size=?, units_total=?, description=?, food1_id=?, food2_id=?, food3_id=?, food4_id=?, food5_id=?, food6_id=?, food7_id=?, food8_id=?  WHERE id = ?;';
 		const { dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id } = req.body;
 		this.edit(
 			query,
 			[dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id, id],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
@@ -91,8 +141,20 @@ export class DishesController extends BaseSQLController {
 		this.delete(
 			query,
 			[id],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 	//#endregion

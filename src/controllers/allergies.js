@@ -16,8 +16,44 @@ export class AllergiesController extends BaseSQLController {
 		const query = `SELECT * FROM allergies`;
 		this.getAll(
 			query,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
+		);
+	}
+
+	getAllegyById(req, res) {
+		const query = `SELECT * FROM allergies WHERE id = ? `;
+		const { id } = req.params;
+
+		this.getById(
+			query,
+			id,
+			response =>
+				res.status(200).json({
+					success: true,
+					message: '',
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(404).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 404,
+					response: error.error
+				})
 		);
 	}
 
@@ -27,7 +63,7 @@ export class AllergiesController extends BaseSQLController {
 	 * @param {Response} res The Express response
 	 */
 
-	async getByAllergyNameMethod(req, res) {
+	async getByAllergyName(req, res) {
 		const query = 'SELECT * FROM allergies WHERE allergy_name = ?';
 		const { allergy_name } = req;
 
@@ -38,8 +74,10 @@ export class AllergiesController extends BaseSQLController {
 				} else {
 					reject(
 						res.status(500).json({
-							message: 'Sorry we have an unexpected error trying fetch allergy name',
-							error: user.sqlMessage
+							success: false,
+							message: 'Sorry we have an unexpected error trying fetch user by user name',
+							httpStatusCode: 500,
+							response: error.sqlMessage
 						})
 					);
 				}
@@ -56,18 +94,33 @@ export class AllergiesController extends BaseSQLController {
 	async createAllergy(req, res) {
 		const query = `INSERT INTO allergies ( allergy_name, description) VALUES  (?, ?)`;
 		const { allergy_name, description } = req.body;
-		const allergyByAllergyName = await this.getByAllergyNameMethod({ allergy_name: allergy_name }, res);
+		const allergyByAllergyName = await this.getByAllergyName({ allergy_name: allergy_name }, res);
 
 		if (allergyByAllergyName && allergyByAllergyName.length) {
 			res.status(409).json({
-				message: 'The allergy already exists'
+				success: false,
+				message: 'The allergy name is already in use',
+				httpStatusCode: 409,
+				response: []
 			});
 		} else {
 			this.create(
 				query,
 				[allergy_name, description],
-				response => res.status(200).json(response),
-				error => res.status(500).json(error)
+				response =>
+					res.status(200).json({
+						success: true,
+						message: response.message,
+						httpStatusCode: 200,
+						response: []
+					}),
+				error =>
+					res.status(500).json({
+						success: false,
+						message: error.message,
+						httpStatusCode: 500,
+						response: error.error
+					})
 			);
 		}
 	}
@@ -85,8 +138,20 @@ export class AllergiesController extends BaseSQLController {
 		this.edit(
 			query,
 			[allergy_name, description, id],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
@@ -103,8 +168,20 @@ export class AllergiesController extends BaseSQLController {
 		this.delete(
 			query,
 			id,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 }

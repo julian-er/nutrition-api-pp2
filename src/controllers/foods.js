@@ -42,6 +42,30 @@ export class FoodsController extends BaseSQLController {
 		);
 	}
 
+	getFoodById(req, res) {
+		const query = `SELECT * FROM foods WHERE id = ? `;
+		const { id } = req.params;
+
+		this.getById(
+			query,
+			id,
+			response =>
+				res.status(200).json({
+					success: true,
+					message: '',
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(404).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 404,
+					response: error.error
+				})
+		);
+	}
+
 	async getByFoodName(req, res) {
 		const query = 'SELECT * FROM foods WHERE food_name= ?';
 		const food_name = req;
@@ -80,7 +104,10 @@ export class FoodsController extends BaseSQLController {
 		const name = await this.getByFoodName(food_name);
 		if (name && name.length) {
 			res.status(409).json({
-				message: 'The food already exists'
+				success: false,
+				message: 'The food name is already in use',
+				httpStatusCode: 409,
+				response: []
 			});
 		} else {
 			this.create(
