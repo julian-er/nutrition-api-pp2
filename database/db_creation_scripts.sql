@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS users (
     isNutritionist BOOLEAN DEFAULT false,
     isPatient BOOLEAN DEFAULT false,
     PRIMARY KEY (id)
+
 );
 
 CREATE TABLE IF NOT EXISTS foods(
