@@ -67,7 +67,7 @@ export class PatologiesController extends BaseSQLController {
 				}
 			});
 		});
-    }
+	}
 
 
         /**
