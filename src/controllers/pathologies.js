@@ -26,8 +26,18 @@ export class PathologiesController extends BaseSQLController {
 
 		this.getAll(
 			query,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response => res.status(200).json({
+				success: true,
+				message: response.message,
+				httpStatusCode: 200,
+				response: response
+			}),
+			error => res.status(500).json({
+				success: false,
+				message: error.message,
+				httpStatusCode: 500,
+				response: error.error
+			})
 		);
 	}
 
@@ -44,10 +54,26 @@ export class PathologiesController extends BaseSQLController {
 		this.getById(
 			query,
 			id,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response => res.status(200).json({
+				success: true,
+				message: '',
+				httpStatusCode: 200,
+				response: response
+			}),
+			error => res.status(500).json({
+				success: false,
+				message: error.message,
+				httpStatusCode: 500,
+				response: error.error
+			})
 		);
 	}
+
+	/**
+	 * Gets an entry by name from any given entity
+	 * @param {Request} req The Express request need to have a email
+	 * @param {Response} res The Express response
+	 */
 
     async getPathologyByNameMethods(req, res) {
 		const query = 'SELECT * FROM pathologies WHERE pathology_name= ?';
@@ -60,14 +86,20 @@ export class PathologiesController extends BaseSQLController {
 				} else {
 					reject(
 						res.status(500).json({
-							message: 'Sorry we have an unexpected error trying fetch pathology by name',
-							error: user.sqlMessage
+							success: false,
+							message: 'Sorry, we got an unexpected error trying to get the pathology by name',
+							httpStatusCode: 500,
+							response: error.sqlMessage
 						})
 					);
 				}
 			});
 		});
 	}
+
+	//#endregion
+
+	//#region Create Methods
 
 
         /**
@@ -87,13 +119,24 @@ export class PathologiesController extends BaseSQLController {
 					this.create(
 					query,
 					[pathology_name, description],
-					response => res.status(200).json(response),
-					error => res.status(500).json(error)
+					response => res.status(200).json({
+						success: true,
+						message: response.message,
+						httpStatusCode: 200,
+						response: []
+					}),
+					error => res.status(500).json({
+						success: false,
+						message: error.message,
+						httpStatusCode: 500,
+						response: error.error
+					})
 				);
         }
     }
+	//#endregion
 
-    	//#region EDIT methods
+    //#region EDIT methods
 
 	/**
 	 * Edits a users
@@ -109,10 +152,24 @@ export class PathologiesController extends BaseSQLController {
 		this.edit(
 			query,
 			[pathology_name, description, id],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response => res.status(200).json({
+				success: true,
+				message: response.message,
+				httpStatusCode: 200,
+				response: []
+			}),
+			error => res.status(500).json({
+				success: false,
+				message: error.message,
+				httpStatusCode: 500,
+				response: error.error
+			})
 		);
 	}
+
+	//#endregion
+
+	//#region DELETE Methods
 
     /**
 	 * Deletes a users
@@ -126,8 +183,18 @@ export class PathologiesController extends BaseSQLController {
 		this.delete(
 			query,
 			id,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response => res.status(200).json({
+				success: true,
+				message: response.message,
+				httpStatusCode: 200,
+				response: []
+			}),
+			error => res.status(500).json({
+				success: false,
+				message: error.message,
+				httpStatusCode: 500,
+				response: error.error
+			})
 		);
 	}
 
