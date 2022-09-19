@@ -24,8 +24,18 @@ export class DailyDietController extends BaseSQLController {
 
 		this.getAll(
 			query,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response => res.status(200).json({
+				success: true,
+				message: response.message,
+				httpStatusCode: 200,
+				response: response
+			}),
+			error => res.status(500).json({
+				success: false,
+				message: error.message,
+				httpStatusCode: 500,
+				response: error.error
+			})
 		);
 	}
 
@@ -41,10 +51,24 @@ export class DailyDietController extends BaseSQLController {
 		this.getById(
 			query,
 			id,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response => res.status(200).json({
+				success: true,
+				message: '',
+				httpStatusCode: 200,
+				response: response
+			}),
+			error => res.status(500).json({
+				success: false,
+				message: error.message,
+				httpStatusCode: 500,
+				response: error.error
+			})
 		);
 	}
+
+		//#endregion
+
+	 //#region Create Methods
 
 	/**
 	 * Creates a Daily Diets
@@ -58,10 +82,23 @@ export class DailyDietController extends BaseSQLController {
 		this.create(
 			query,
 			[dish1_id, dish2_id, dish3_id, dish4_id],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response => res.status(200).json({
+				success: true,
+				message: response.message,
+				httpStatusCode: 200,
+				response: []
+			}),
+			error => res.status(500).json({
+				success: false,
+				message: error.message,
+				httpStatusCode: 500,
+				response: error.error
+			})
 		);
 	}
+
+	
+	//#endregion
 
 	//#region EDIT methods
 
@@ -79,10 +116,24 @@ export class DailyDietController extends BaseSQLController {
 		this.edit(
 			query,
 			[dish1_id, dish2_id, dish3_id, dish4_id, id],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response => res.status(200).json({
+				success: true,
+				message: response.message,
+				httpStatusCode: 200,
+				response: []
+			}),
+			error => res.status(500).json({
+				success: false,
+				message: error.message,
+				httpStatusCode: 500,
+				response: error.error
+			})
 		);
 	}
+
+	//#endregion
+
+	//#region DELETE Methods
 
 	/**
 	 * Deletes a Daily_Diets
@@ -96,8 +147,19 @@ export class DailyDietController extends BaseSQLController {
 		this.delete(
 			query,
 			id,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response => res.status(200).json({
+				success: true,
+				message: response.message,
+				httpStatusCode: 200,
+				response: []
+			}),
+			error => res.status(500).json({
+				success: false,
+				message: error.message,
+				httpStatusCode: 500,
+				response: error.error
+			})
 		);
 	}
+	//#endregion  
 }

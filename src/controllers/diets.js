@@ -191,6 +191,5 @@ export class DietsController extends BaseSQLController {
 		);
 	}
 
-	//#endregion
-  
+	//#endregion  
 }
