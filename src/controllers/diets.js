@@ -25,8 +25,18 @@ export class DietsController extends BaseSQLController {
 
 		this.getAll(
 			query,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response => res.status(200).json({
+				success: true,
+				message: response.message,
+				httpStatusCode: 200,
+				response: response
+			}),
+			error => res.status(500).json({
+				success: false,
+				message: error.message,
+				httpStatusCode: 500,
+				response: error.error
+			})
 		);
 	}
 
@@ -42,8 +52,18 @@ export class DietsController extends BaseSQLController {
 		this.getById(
 			query,
 			id,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response => res.status(200).json({
+				success: true,
+				message: '',
+				httpStatusCode: 200,
+				response: response
+			}),
+			error => res.status(500).json({
+				success: false,
+				message: error.message,
+				httpStatusCode: 500,
+				response: error.error
+			})
 		);
 	}
 
@@ -64,8 +84,10 @@ export class DietsController extends BaseSQLController {
 				} else {
 					reject(
 						res.status(500).json({
-							message: 'Sorry we have an unexpected error trying fetch diet by name',
-							error: user.sqlMessage
+							success: false,
+							message: 'Sorry, we got an unexpected error trying to get the diet by name',
+							httpStatusCode: 500,
+							response: error.sqlMessage
 						})
 					);
 				}
@@ -90,8 +112,18 @@ export class DietsController extends BaseSQLController {
 				this.create(
 				query,
 				[ diet_name ],
-				response => res.status(200).json(response),
-				rror => res.status(500).json(error)
+				response => res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+				rror => res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 			);
     }
 
@@ -113,8 +145,18 @@ export class DietsController extends BaseSQLController {
 		this.edit(
 			query,
 			[ diet_name, id ],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response => res.status(200).json({
+				success: true,
+				message: response.message,
+				httpStatusCode: 200,
+				response: []
+			}),
+			error => res.status(500).json({
+				success: false,
+				message: error.message,
+				httpStatusCode: 500,
+				response: error.error
+			})
 		);
 	}
 
@@ -134,8 +176,18 @@ export class DietsController extends BaseSQLController {
 		this.delete(
 			query,
 			id,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response => res.status(200).json({
+				success: true,
+				message: response.message,
+				httpStatusCode: 200,
+				response: []
+			}),
+			error => res.status(500).json({
+				success: false,
+				message: error.message,
+				httpStatusCode: 500,
+				response: error.error
+			})
 		);
 	}
 
