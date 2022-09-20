@@ -292,7 +292,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"allergy_name\" :\"Celiaquía\",\r\n    \"description\" : \"La enfermedad celíaca es una afección autoinmune que daña al revestimiento del intestino delgado.\"\r\n}",
+							"raw": "{\r\n    \"allergy_name\" :\"celiaquia\",\r\n    \"description\" : \"La enfermedad celíaca es una afección autoinmune que daña al revestimiento del intestino delgado.\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -337,7 +337,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/allergies/delete/2",
+							"raw": "localhost:8000/allergies/delete/3",
 							"host": [
 								"localhost"
 							],
@@ -345,7 +345,7 @@
 							"path": [
 								"allergies",
 								"delete",
-								"2"
+								"3"
 							]
 						}
 					},
@@ -358,7 +358,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"allergy_name\": \"Celiac Disease\",\r\n    \"description\": \"Celiac disease, sometimes called celiac sprue or gluten-sensitive enteropathy, is an immune reaction to eating gluten, a protein found in wheat, barley and rye.\"\r\n}",
+							"raw": "{\r\n    \"allergy_name\": \"celiac disease\",\r\n    \"description\": \"Celiac disease, sometimes called celiac sprue or gluten-sensitive enteropathy, is an immune reaction to eating gluten, a protein found in wheat, barley and rye.\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -394,6 +394,26 @@
 							"path": [
 								"allergies",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alergy By Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/allergies/allergy/celiac disease",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"allergies",
+								"allergy",
+								"celiac disease"
 							]
 						}
 					},
@@ -513,6 +533,33 @@
 							"path": [
 								"foods",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Food By Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/foods/food/watermelon",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"foods",
+								"food",
+								"watermelon"
+							],
+							"query": [
+								{
+									"key": "food_name",
+									"value": "meat",
+									"disabled": true
+								}
 							]
 						}
 					},

@@ -7,7 +7,7 @@ export class AllergiesController extends BaseSQLController {
 	 * @param {string} PluralEntityId The entity ID
 	 */
 	constructor(SingularEntityId, PluralEntityId) {
-		super(SingularEntityId ?? 'alergy', PluralEntityId ?? 'allergies');
+		super(SingularEntityId ?? 'allergy', PluralEntityId ?? 'allergies');
 		this.PluralEntityId = PluralEntityId ? PluralEntityId : 'allergies';
 		this.SingularEntityId = SingularEntityId ? SingularEntityId : 'allergy';
 	}
@@ -33,7 +33,7 @@ export class AllergiesController extends BaseSQLController {
 		);
 	}
 
-	getAllegyById(req, res) {
+	getAllergyById(req, res) {
 		const query = `SELECT * FROM allergies WHERE id = ? `;
 		const { id } = req.params;
 
@@ -63,9 +63,9 @@ export class AllergiesController extends BaseSQLController {
 	 * @param {Response} res The Express response
 	 */
 
-	async getByAllergyName(req, res) {
+	async getByAllergyNameMethod(req, res) {
 		const query = 'SELECT * FROM allergies WHERE allergy_name = ?';
-		const { allergy_name } = req;
+		const allergy_name = req;
 
 		return new Promise((resolve, reject) => {
 			mysqlConnection.query(query, [allergy_name], (error, rows, _fields) => {
@@ -85,6 +85,28 @@ export class AllergiesController extends BaseSQLController {
 		});
 	}
 
+	async getAllergyByName(req, res) {
+		const { allergy_name } = req.params;
+		const allergy = await this.getByAllergyNameMethod(allergy_name, res);
+		if (allergy) {
+			if (allergy.length) {
+				res.status(200).json({
+					success: true,
+					message: '',
+					httpStatusCode: 200,
+					response: allergy[0]
+				});
+			} else {
+				res.status(404).json({
+					success: false,
+					message: `Sorry ${this.SingularEntityId} with name: ${allergy_name} not found`,
+					httpStatusCode: 404,
+					response: allergy
+				});
+			}
+		}
+	}
+
 	/**
 	 * Creates an allergy
 	 * @param {Request} req The Express request
@@ -94,7 +116,7 @@ export class AllergiesController extends BaseSQLController {
 	async createAllergy(req, res) {
 		const query = `INSERT INTO allergies ( allergy_name, description) VALUES  (?, ?)`;
 		const { allergy_name, description } = req.body;
-		const allergyByAllergyName = await this.getByAllergyName({ allergy_name: allergy_name }, res);
+		const allergyByAllergyName = await this.getByAllergyNameMethod({ allergy_name: allergy_name }, res);
 
 		if (allergyByAllergyName && allergyByAllergyName.length) {
 			res.status(409).json({

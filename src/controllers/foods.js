@@ -66,10 +66,10 @@ export class FoodsController extends BaseSQLController {
 		);
 	}
 
-	async getByFoodName(req, res) {
+	async getFoodByNameMethod(req, res) {
 		const query = 'SELECT * FROM foods WHERE food_name= ?';
 		const food_name = req;
-
+		console.log(food_name);
 		return new Promise((resolve, reject) => {
 			mysqlConnection.query(query, [food_name], (error, rows, _fields) => {
 				if (!error) {
@@ -88,6 +88,28 @@ export class FoodsController extends BaseSQLController {
 		});
 	}
 
+	async getFoodByName(req, res) {
+		const { food_name } = req.params;
+		const food = await this.getFoodByNameMethod(food_name, res);
+		if (food) {
+			if (food.length) {
+				res.status(200).json({
+					success: true,
+					message: '',
+					httpStatusCode: 200,
+					response: food[0]
+				});
+			} else {
+				res.status(404).json({
+					success: false,
+					message: `Sorry ${this.SingularEntityId} with name: ${food_name} not found`,
+					httpStatusCode: 404,
+					response: food
+				});
+			}
+		}
+	}
+
 	//#endregion
 
 	/**
@@ -101,7 +123,7 @@ export class FoodsController extends BaseSQLController {
 	async createFood(req, res) {
 		const query = 'INSERT INTO foods (food_name, description, photo, food_unit) VALUES(?, ?, ?, ?)';
 		const { food_name, description, photo, food_unit } = req.body;
-		const name = await this.getByFoodName(food_name);
+		const name = await this.getFoodByNameMethod(food_name);
 		if (name && name.length) {
 			res.status(409).json({
 				success: false,
