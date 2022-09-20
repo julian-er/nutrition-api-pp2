@@ -65,7 +65,7 @@ export class AllergiesController extends BaseSQLController {
 
 	async getByAllergyNameMethod(req, res) {
 		const query = 'SELECT * FROM allergies WHERE allergy_name = ?';
-		const allergy_name = req;
+		const { allergy_name } = req;
 
 		return new Promise((resolve, reject) => {
 			mysqlConnection.query(query, [allergy_name], (error, rows, _fields) => {
@@ -86,8 +86,8 @@ export class AllergiesController extends BaseSQLController {
 	}
 
 	async getAllergyByName(req, res) {
-		const { allergy_name } = req.params;
-		const allergy = await this.getByAllergyNameMethod(allergy_name, res);
+		const { allergy_name } = req;
+		const allergy = await this.getByAllergyNameMethod(req, res);
 		if (allergy) {
 			if (allergy.length) {
 				res.status(200).json({

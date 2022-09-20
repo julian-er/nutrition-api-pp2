@@ -68,8 +68,8 @@ export class FoodsController extends BaseSQLController {
 
 	async getFoodByNameMethod(req, res) {
 		const query = 'SELECT * FROM foods WHERE food_name= ?';
-		const food_name = req;
-		console.log(food_name);
+		const { food_name } = req;
+
 		return new Promise((resolve, reject) => {
 			mysqlConnection.query(query, [food_name], (error, rows, _fields) => {
 				if (!error) {
@@ -89,8 +89,8 @@ export class FoodsController extends BaseSQLController {
 	}
 
 	async getFoodByName(req, res) {
-		const { food_name } = req.params;
-		const food = await this.getFoodByNameMethod(food_name, res);
+		const { food_name } = req;
+		const food = await this.getFoodByNameMethod(req, res);
 		if (food) {
 			if (food.length) {
 				res.status(200).json({
@@ -123,7 +123,7 @@ export class FoodsController extends BaseSQLController {
 	async createFood(req, res) {
 		const query = 'INSERT INTO foods (food_name, description, photo, food_unit) VALUES(?, ?, ?, ?)';
 		const { food_name, description, photo, food_unit } = req.body;
-		const name = await this.getFoodByNameMethod(food_name);
+		const name = await this.getFoodByNameMethod({ food_name }, res);
 		if (name && name.length) {
 			res.status(409).json({
 				success: false,
