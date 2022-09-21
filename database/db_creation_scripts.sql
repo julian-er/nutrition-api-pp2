@@ -159,9 +159,9 @@ CREATE TABLE IF NOT EXISTS user_diet(
 
 CREATE TABlE IF NOT EXISTS user_notes(
     id INT NOT NULL AUTO_INCREMENT,
+    note_name VARCHAR (45) NOT NULL,
     user1_id INT NOT NULL,
     user2_id INT NOT NULL /*nutritionist id*/,
-    title VARCHAR(30) NOT NULL,
     note_date DATE NOT NULL,
     content TEXT,
     FOREIGN KEY (user1_id) REFERENCES users(id),
