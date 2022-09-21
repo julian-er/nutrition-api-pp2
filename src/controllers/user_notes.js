@@ -12,12 +12,31 @@ export class UserNotesController extends BaseSQLController {
 		this.SingularEntityId = SingularEntityId ? SingularEntityId : 'user_note';
 	}
 
+	//#region Get Methods
+
+	/**
+	 * Gets all Notes
+	 * @param {Request} _req The Express request
+	 * @param {Response} res The Express response
+	 */
 	getUserNotes(_req, res) {
 		const query = `SELECT * FROM user_notes`;
 		this.getAll(
 			query,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
@@ -37,10 +56,17 @@ export class UserNotesController extends BaseSQLController {
 					resolve(rows);
 				} else {
 					reject(
-						res.status(500).json({
-							message: 'Sorry we have an unexpected error trying fetch note name',
-							error: user.sqlMessage
-						})
+						res
+							.status({
+								success: false,
+								message: error.message,
+								httpStatusCode: 500,
+								response: error.error
+							})
+							.json({
+								message: 'Sorry we have an unexpected error trying fetch note name',
+								error: user.sqlMessage
+							})
 					);
 				}
 			});
@@ -48,7 +74,7 @@ export class UserNotesController extends BaseSQLController {
 	}
 
 	/**
-	 * Creates an user_note
+	 * Creates an user note
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
@@ -61,13 +87,25 @@ export class UserNotesController extends BaseSQLController {
 		this.create(
 			query,
 			[note_name, user1_id, user2_id, note_date, content],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: '',
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
 	/**
-	 * Edits an note
+	 * Edits an user note
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
@@ -79,13 +117,25 @@ export class UserNotesController extends BaseSQLController {
 		this.edit(
 			query,
 			[note_name, user1_id, user2_id, note_date, content, id],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: '',
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
 	/**
-	 * Deletes an note
+	 * Deletes an user note
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
@@ -97,8 +147,20 @@ export class UserNotesController extends BaseSQLController {
 		this.delete(
 			query,
 			id,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: '',
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 }
