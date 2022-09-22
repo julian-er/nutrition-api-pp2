@@ -9,7 +9,7 @@ import { setAllergiesRoutes } from './allergies.js';
 import { setFoodsRoutes } from './foods.js';
 import { setDishesRoutes } from './dishes.js';
 import { setDietsRoutes } from './diets.js';
-
+import { setUserNotesRoutes } from './user_notes.js';
 
 const router = Router();
 
@@ -19,10 +19,11 @@ export function setRouter() {
 	setUserRoutes(router);
 	setLogInRoutes(router);
 	setPathologiesRoutes(router);
-	setAllergiesRoutes(router)
+	setAllergiesRoutes(router);
 	setDailyDietsRoutes(router);
 	setFoodsRoutes(router);
 	setDishesRoutes(router);
 	setDietsRoutes(router);
+	setUserNotesRoutes(router);
 	return router;
 }

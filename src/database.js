@@ -1,4 +1,4 @@
-import {createConnection} from 'mysql';
+import { createConnection } from 'mysql';
 import chalk from 'chalk';
 
 //Create connection to MySQL Server
