@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS users (
     user_name VARCHAR(20) NOT NULL,
     password VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    first_name VARCHAR(35) NOT NULL,
-    last_name VARCHAR(30) NOT NULL,
+    first_name VARCHAR(60) NOT NULL,
+    last_name VARCHAR(60) NOT NULL,
     phone_number VARCHAR (45) DEFAULT NULL,
     birth_date DATE,
     profile_image TEXT DEFAULT NULL, /* We are using base-64 for store images */
@@ -17,19 +17,30 @@ CREATE TABLE IF NOT EXISTS users (
 
 );
 
+CREATE TABLE IF NOT EXISTS patient_measures(
+    id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    heigth_value VARCHAR (45) NOT NULL,
+    weigth_value VARCHAR (45) NOT NULL,
+    weigth_date DATE,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE IF NOT EXISTS foods(
     id INT NOT NULL AUTO_INCREMENT,
     food_name VARCHAR(30) NOT NULL,
-    description VARCHAR(255) DEFAULT NULL,
+    description TEXT  DEFAULT NULL,
     photo TEXT DEFAULT NULL, /* We are using base-64 for store images */
     food_unit VARCHAR(30), /* (grams, mililiters, etc) */
 	PRIMARY KEY (id)
 );
 
+
 CREATE TABLE IF NOT EXISTS units (
     id INT NOT NULL AUTO_INCREMENT,
     unit_name VARCHAR(30) NOT NULL,
-    description VARCHAR(255) DEFAULT NULL,
+    description TEXT DEFAULT NULL,
     PRIMARY KEY (id)
 );
 
@@ -45,7 +56,7 @@ CREATE TABLE IF NOT EXISTS food_unit(
 CREATE TABLE IF NOT EXISTS categories(
     id INT NOT NULL AUTO_INCREMENT,
     category_name VARCHAR(30) NOT NULL,
-    description VARCHAR(255) DEFAULT NULL,
+    description TEXT DEFAULT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -61,7 +72,7 @@ CREATE TABLE IF NOT EXISTS dishes(
     dish_name VARCHAR(120),
     dish_size INT,  
     units_total VARCHAR(30),
-    description VARCHAR(255),
+    description TEXT,
     food1_id INT DEFAULT NULL,
     food2_id INT DEFAULT NULL,
     food3_id INT DEFAULT NULL,
@@ -99,7 +110,7 @@ CREATE TABLE IF NOT EXISTS user_daily_diet(
     user_id INT NOT NULL,
     daily_diet_id INT NOT NULL,
     day VARCHAR(10) DEFAULT NULL,
-    description VARCHAR(255) DEFAULT NULL,
+    description TEXT DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (daily_diet_id) REFERENCES daily_diets(id),
     PRIMARY KEY (id)
@@ -108,14 +119,14 @@ CREATE TABLE IF NOT EXISTS user_daily_diet(
 CREATE TABLE IF NOT EXISTS allergies(
     id INT NOT NULL AUTO_INCREMENT,
     allergy_name VARCHAR(60) NOT NULL,
-    description VARCHAR(255) DEFAULT NULL,
+    description TEXT DEFAULT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS allergy_excludes_food(
     allergy_id INT NOT NULL,
     food_id INT NOT NULL,
-    description VARCHAR(255)DEFAULT NULL,
+    description TEXT DEFAULT NULL,
     FOREIGN KEY (food_id) REFERENCES foods(id),
     FOREIGN KEY (allergy_id) REFERENCES allergies(id)
 );
@@ -123,22 +134,22 @@ CREATE TABLE IF NOT EXISTS allergy_excludes_food(
 CREATE TABLE IF NOT EXISTS user_allergy(
     allergy_id INT NOT NULL,
     user_id INT NOT NULL,
-    description VARCHAR(255)DEFAULT NULL,
+    description TEXT DEFAULT NULL,
     FOREIGN KEY (allergy_id) REFERENCES allergies(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE IF NOT EXISTS pathologies(
     id INT NOT NULL AUTO_INCREMENT,
-    pathology_name VARCHAR(200) NOT NULL
-    description VARCHAR(255) DEFAULT NULL,
+    pathology_name VARCHAR(200) NOT NULL,
+    description TEXT DEFAULT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS user_pathology(
     pathology_id INT NOT NULL,
     user_id INT NOT NULL,
-    description VARCHAR(255)DEFAULT NULL,
+    description TEXT DEFAULT NULL,
     FOREIGN KEY (pathology_id) REFERENCES pathologies(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
@@ -146,22 +157,31 @@ CREATE TABLE IF NOT EXISTS user_pathology(
 CREATE TABLE IF NOT EXISTS diets(
     id INT NOT NULL AUTO_INCREMENT,
     diet_name VARCHAR(60) NOT NULL,
+    description TEXT DEFAULT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS user_diet(
     user_id INT NOT NULL,
     diet_id INT NOT NULL,
-    description VARCHAR(255) DEFAULT NULL,
+    description TEXT DEFAULT NULL,
     FOREIGN KEY (diet_id) REFERENCES diets(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+CREATE TABLE IF NOT EXISTS diet_excludes_food(
+    diet_id INT NOT NULL,
+    food_id INT NOT NULL,
+    description TEXT DEFAULT NULL,
+    FOREIGN KEY (food_id) REFERENCES foods(id),
+    FOREIGN KEY (diet_id) REFERENCES diets(id)
+);
+
 CREATE TABlE IF NOT EXISTS user_notes(
     id INT NOT NULL AUTO_INCREMENT,
+    note_name VARCHAR (45) NOT NULL,
     user1_id INT NOT NULL,
     user2_id INT NOT NULL /*nutritionist id*/,
-    title VARCHAR(30) NOT NULL,
     note_date DATE NOT NULL,
     content TEXT,
     FOREIGN KEY (user1_id) REFERENCES users(id),

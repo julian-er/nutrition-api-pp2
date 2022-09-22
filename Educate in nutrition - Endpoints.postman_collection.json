@@ -191,14 +191,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/users/7",
+							"raw": "localhost:8000/users/delete/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"users",
-								"7"
+								"delete",
+								"1"
 							]
 						}
 					},
@@ -220,14 +221,14 @@
 							"raw": "{\r\n    \"user_name\": \"testUser\",\r\n    \"password\": \"someTestPassword\",\r\n    \"email\": \"sometestemail44@gmail.com\",\r\n    \"first_name\": \"Nutri\",\r\n    \"last_name\": \"Tionist\",\r\n    \"phone_number\": \"6578347892\",\r\n    \"birth_date\": null,\r\n    \"profile_image\": null,\r\n    \"isNutritionist\": true,\r\n    \"isPatient\": false\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8000/users/creation",
+							"raw": "localhost:8000/users/create",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"users",
-								"creation"
+								"create"
 							]
 						}
 					},
@@ -291,7 +292,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"allergy_name\" :\"Celiaquía\",\r\n    \"description\" : \"La enfermedad celíaca es una afección autoinmune que daña al revestimiento del intestino delgado.\"\r\n}",
+							"raw": "{\r\n    \"allergy_name\" :\"celiaquia\",\r\n    \"description\" : \"La enfermedad celíaca es una afección autoinmune que daña al revestimiento del intestino delgado.\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -336,6 +337,55 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
+							"raw": "localhost:8000/allergies/delete/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"allergies",
+								"delete",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Allergies Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"allergy_name\": \"celiac disease\",\r\n    \"description\": \"Celiac disease, sometimes called celiac sprue or gluten-sensitive enteropathy, is an immune reaction to eating gluten, a protein found in wheat, barley and rye.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/allergies/update/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"allergies",
+								"update",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Allergy by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
 							"raw": "localhost:8000/allergies/2",
 							"host": [
 								"localhost"
@@ -350,28 +400,20 @@
 					"response": []
 				},
 				{
-					"name": "Allergies Update",
+					"name": "Alergy By Name",
 					"request": {
-						"method": "PUT",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"allergy_name\": \"Celiac Disease\",\r\n    \"description\": \"Celiac disease, sometimes called celiac sprue or gluten-sensitive enteropathy, is an immune reaction to eating gluten, a protein found in wheat, barley and rye.\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8000/allergies/1",
+							"raw": "localhost:8000/allergies/allergy/celiac disease",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"allergies",
-								"1"
+								"allergy",
+								"celiac disease"
 							]
 						}
 					},
@@ -407,7 +449,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n{\r\n    \"food_name\": \"sandia\",\r\n    \"description\": \"Citrullus lanatus, comúnmente llamada melón de agua, sandía, acendría, sindria, patilla, es una especie de la familia Cucurbitaceae. Es originaria de África con una gran presencia y difusión en todo el mundo.\",\r\n    \"photo\": \"photo\",\r\n    \"food_unit\":\"g\"\r\n}\r\n\r\n{\r\n    \"food_name\": \"meat\",\r\n    \"description\": \"Meat is mainly composed of water, protein, and fat. It is edible raw, but is normally eaten after it has been cooked and seasoned or processed in a variety of ways. Unprocessed meat will spoil or rot within hours or days as a result of infection with, and decomposition by, bacteria and fungi.\",\r\n    \"photo\": \"photo\",\r\n    \"food_unit\":\"g\"\r\n},\r\n{\r\n    \"food_name\": \"egg\",\r\n    \"description\": \"An egg is an organic vessel grown by an animal to carry a possibly fertilized egg cell (a zygote) and to incubate from it an embryo within the egg until the embryo has become an animal fetus that can survive on its own, at which point the animal hatches.\",\r\n    \"photo\": \"photo\",\r\n    \"food_unit\":\"g\"\r\n}\r\n]\r\n",
+							"raw": "\r\n{\r\n    \"food_name\": \"sandia\",\r\n    \"description\": \"Citrullus lanatus, comúnmente llamada melón de agua, sandía, acendría, sindria, patilla, es una especie de la familia Cucurbitaceae. Es originaria de África con una gran presencia y difusión en todo el mundo.\",\r\n    \"photo\": \"photo\",\r\n    \"food_unit\":\"g\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -435,13 +477,53 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"food_name\": \"watermelon\",\r\n    \"description\": \"watermelon, (Citrullus lanatus), succulent fruit and vinelike plant of the gourd family (Cucurbitaceae), native to tropical Africa and cultivated around the world.\",\r\n    \"photo\": \"photo\",\r\n    \"food_unit\": \"g\"\r\n}",
+							"raw": "{\r\n    \"food_name\": \"watermelon\",\r\n    \"description\": \"watermelon, (Citrullus lanatus), succulent fruit and vinelike plant of the gourd family (Cucurbitaceae), native to tropical Africa and cultivated around the world.\",\r\n    \"photo\": \"laskgplasm\",\r\n    \"food_unit\": \"g\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
+						"url": {
+							"raw": "localhost:8000/foods/update/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"foods",
+								"update",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Foods delete by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/foods/delete/12",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"foods",
+								"delete",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Food by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "localhost:8000/foods/2",
 							"host": [
@@ -457,47 +539,27 @@
 					"response": []
 				},
 				{
-					"name": "Foods delete by ID",
+					"name": "Food By Name",
 					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/foods/4",
+							"raw": "localhost:8000/foods/food/watermelon",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"foods",
-								"4"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "New Request",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n    \"food_name\": \"meat\",\r\n    \"description\": \"Meat is mainly composed of water, protein, and fat. It is edible raw, but is normally eaten after it has been cooked and seasoned or processed in a variety of ways. Unprocessed meat will spoil or rot within hours or days as a result of infection\",\r\n    \"photo\": \"photo\",\r\n    \"food_unit\":\"g\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+								"food",
+								"watermelon"
+							],
+							"query": [
+								{
+									"key": "food_name",
+									"value": "meat",
+									"disabled": true
 								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/foods/create",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"foods",
-								"create"
 							]
 						}
 					},
@@ -532,14 +594,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/dishes/2",
+							"raw": "localhost:8000/dishes/4",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"dishes",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -576,8 +638,20 @@
 				{
 					"name": "Dish Delete",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/dishes/delete/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"dishes",
+								"delete",
+								"2"
+							]
+						}
 					},
 					"response": []
 				}

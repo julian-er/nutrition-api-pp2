@@ -25,14 +25,50 @@ export class FoodsController extends BaseSQLController {
 		const query = `SELECT * FROM foods`;
 		this.getAll(
 			query,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
-	async getFoodByNameMethods(req, res) {
+	getFoodById(req, res) {
+		const query = `SELECT * FROM foods WHERE id = ? `;
+		const { id } = req.params;
+
+		this.getById(
+			query,
+			id,
+			response =>
+				res.status(200).json({
+					success: true,
+					message: '',
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(404).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 404,
+					response: error.error
+				})
+		);
+	}
+
+	async getFoodByNameMethod(req, res) {
 		const query = 'SELECT * FROM foods WHERE food_name= ?';
-		const food_name = req;
+		const { food_name } = req;
 
 		return new Promise((resolve, reject) => {
 			mysqlConnection.query(query, [food_name], (error, rows, _fields) => {
@@ -41,13 +77,37 @@ export class FoodsController extends BaseSQLController {
 				} else {
 					reject(
 						res.status(500).json({
-							message: 'Sorry we have an unexpected error trying fetch food by name',
-							error: user.sqlMessage
+							success: false,
+							message: `Sorry ${this.SingularEntityId} with name: ${food_name} not found`,
+							httpStatusCode: 404,
+							response: error.sqlMessage
 						})
 					);
 				}
 			});
 		});
+	}
+
+	async getFoodByName(req, res) {
+		const { food_name } = req;
+		const food = await this.getFoodByNameMethod(req, res);
+		if (food) {
+			if (food.length) {
+				res.status(200).json({
+					success: true,
+					message: '',
+					httpStatusCode: 200,
+					response: food[0]
+				});
+			} else {
+				res.status(404).json({
+					success: false,
+					message: `Sorry ${this.SingularEntityId} with name: ${food_name} not found`,
+					httpStatusCode: 404,
+					response: food
+				});
+			}
+		}
 	}
 
 	//#endregion
@@ -63,17 +123,32 @@ export class FoodsController extends BaseSQLController {
 	async createFood(req, res) {
 		const query = 'INSERT INTO foods (food_name, description, photo, food_unit) VALUES(?, ?, ?, ?)';
 		const { food_name, description, photo, food_unit } = req.body;
-		const name = await this.getFoodByNameMethods(food_name);
+		const name = await this.getFoodByNameMethod({ food_name }, res);
 		if (name && name.length) {
 			res.status(409).json({
-				message: 'The food already exists'
+				success: false,
+				message: 'The food name is already in use',
+				httpStatusCode: 409,
+				response: []
 			});
 		} else {
 			this.create(
 				query,
 				[food_name, description, photo, food_unit],
-				response => res.status(200).json(response),
-				error => res.status(500).json(error)
+				response =>
+					res.status(200).json({
+						success: true,
+						message: response.message,
+						httpStatusCode: 200,
+						response: []
+					}),
+				error =>
+					res.status(500).json({
+						success: false,
+						message: error.message,
+						httpStatusCode: 500,
+						response: []
+					})
 			);
 		}
 	}
@@ -93,9 +168,21 @@ export class FoodsController extends BaseSQLController {
 		const { food_name, description, photo, food_unit } = req.body;
 		this.edit(
 			query,
-			[food_name, description, photo, portion_value, dish_size, id],
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			[food_name, description, photo, food_unit, id],
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 	//#endregion
@@ -114,8 +201,20 @@ export class FoodsController extends BaseSQLController {
 		this.delete(
 			query,
 			id,
-			response => res.status(200).json(response),
-			error => res.status(500).json(error)
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 	//#endregion
