@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS user_measures_history (
     id INT NOT NULL AUTO_INCREMENT,
     user_id INT NOT NULL,
 	date DATE NOT NULL,
-    heigth VARCHAR (45), /* this can be null beacuse users allways change their weight but not the height */
-    weigth VARCHAR (45) NOT NULL,
+    height VARCHAR (45), /* this can be null beacuse users allways change their weight but not the height */
+    weight VARCHAR (45) NOT NULL,
 	FOREIGN KEY (user_id) REFERENCES user(id),
 	PRIMARY KEY (id)
 );
