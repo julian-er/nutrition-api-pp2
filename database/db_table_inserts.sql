@@ -17,7 +17,7 @@ VALUES
   (2, "2022-10-8", "1,70", "90"),
   (3, "2022-09-25", "1,80", "67"),
   (3, "2022-10-8", "1,80", "73"),
-  (4, "2022-10-8", "1,80", "78")
+  (4, "2022-10-8", "1,80", "78");
 
 INSERT INTO allergy 
   (name, description) 
@@ -28,14 +28,15 @@ VALUES
 INSERT INTO pathology
   (name, description)
 VALUES
-  ("Diabetes", "Un grupo de enfermedades que tiene como resultado un exceso de azúcar en la sangre (glucosa sanguínea elevada)" );
+  ("Diabetes", "Un grupo de enfermedades que tiene como resultado un exceso de azúcar en la sangre (glucosa sanguínea elevada)" ),
   ("Diabetes tipo 2", "En la diabetes tipo 2, el cuerpo de la persona no produce suficiente insulina o es resistente a la insulina. Los síntomas incluyen sed, micción frecuente, hambre, cansancio y visión borrosa. En algunos casos, no hay síntomas. Los tratamientos incluyen dieta, ejercicios, insulinoterapia y medicación." );
 
-iNSERT INTO food
+INSERT INTO food
   (name, description, image)
 VALUES
-  ("Carne","La carne es el tejido animal, principalmente muscular, que se consume como alimento.​Se trata de una clasificación coloquial y comercial que solo se aplica a animales terrestres", "image")
-
-
-
-
+  ("Carne","La carne es el tejido animal, principalmente muscular, que se consume como alimento.​Se trata de una clasificación coloquial y comercial que solo se aplica a animales terrestres", "image");
+  
+INSERT INTO food_category
+	(name, description)
+VALUES
+	("vegetales", "Las verduras son hortalizas cuyo color predominante es el verde.​ Sin embargo, el uso popular suele extender su significado a otras partes comestibles de las plantas");
