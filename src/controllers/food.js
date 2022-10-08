@@ -1,4 +1,3 @@
-import { response } from 'express';
 import { mysqlConnection } from '../database.js';
 import BaseSQLController from './base-sql.js';
 
@@ -22,7 +21,7 @@ export class FoodsController extends BaseSQLController {
 	 */
 
 	getFoods(_req, res) {
-		const query = `SELECT * FROM foods`;
+		const query = `SELECT * FROM food`;
 		this.getAll(
 			query,
 			response =>
@@ -43,7 +42,7 @@ export class FoodsController extends BaseSQLController {
 	}
 
 	getFoodById(req, res) {
-		const query = `SELECT * FROM foods WHERE id = ? `;
+		const query = `SELECT * FROM food WHERE id = ? `;
 		const { id } = req.params;
 
 		this.getById(
@@ -67,18 +66,18 @@ export class FoodsController extends BaseSQLController {
 	}
 
 	async getFoodByNameMethod(req, res) {
-		const query = 'SELECT * FROM foods WHERE food_name= ?';
-		const { food_name } = req;
+		const query = 'SELECT * FROM food WHERE name= ?';
+		const { name } = req;
 
 		return new Promise((resolve, reject) => {
-			mysqlConnection.query(query, [food_name], (error, rows, _fields) => {
+			mysqlConnection.query(query, [name], (error, rows, _fields) => {
 				if (!error) {
 					resolve(rows);
 				} else {
 					reject(
 						res.status(500).json({
 							success: false,
-							message: `Sorry ${this.SingularEntityId} with name: ${food_name} not found`,
+							message: `Sorry ${this.SingularEntityId} with name: ${name} not found`,
 							httpStatusCode: 404,
 							response: error.sqlMessage
 						})
@@ -89,7 +88,7 @@ export class FoodsController extends BaseSQLController {
 	}
 
 	async getFoodByName(req, res) {
-		const { food_name } = req;
+		const { name } = req;
 		const food = await this.getFoodByNameMethod(req, res);
 		if (food) {
 			if (food.length) {
@@ -102,7 +101,7 @@ export class FoodsController extends BaseSQLController {
 			} else {
 				res.status(404).json({
 					success: false,
-					message: `Sorry ${this.SingularEntityId} with name: ${food_name} not found`,
+					message: `Sorry ${this.SingularEntityId} with name: ${name} not found`,
 					httpStatusCode: 404,
 					response: food
 				});
@@ -121,10 +120,10 @@ export class FoodsController extends BaseSQLController {
 	//#region POST methods
 
 	async createFood(req, res) {
-		const query = 'INSERT INTO foods (food_name, description, photo, food_unit) VALUES(?, ?, ?, ?)';
-		const { food_name, description, photo, food_unit } = req.body;
-		const name = await this.getFoodByNameMethod({ food_name }, res);
-		if (name && name.length) {
+		const query = 'INSERT INTO food (name, description, image) VALUES(?, ?, ?)';
+		const { name, description, image } = req.body;
+		const food_name = await this.getFoodByNameMethod({ name : name }, res);
+		if (food_name && food_name.length) {
 			res.status(409).json({
 				success: false,
 				message: 'The food name is already in use',
@@ -134,7 +133,7 @@ export class FoodsController extends BaseSQLController {
 		} else {
 			this.create(
 				query,
-				[food_name, description, photo, food_unit],
+				[name, description, image],
 				response =>
 					res.status(200).json({
 						success: true,
@@ -147,7 +146,7 @@ export class FoodsController extends BaseSQLController {
 						success: false,
 						message: error.message,
 						httpStatusCode: 500,
-						response: []
+						response: error.error
 					})
 			);
 		}
@@ -164,11 +163,11 @@ export class FoodsController extends BaseSQLController {
 
 	editFood(req, res) {
 		const { id } = req.params;
-		const query = 'UPDATE foods SET food_name = ?, description= ?, photo= ?, food_unit= ?  WHERE id = ?;';
-		const { food_name, description, photo, food_unit } = req.body;
+		const query = 'UPDATE food SET name = ?, description= ?, image= ?  WHERE id = ?;';
+		const { name, description, image } = req.body;
 		this.edit(
 			query,
-			[food_name, description, photo, food_unit, id],
+			[name, description, image, id],
 			response =>
 				res.status(200).json({
 					success: true,
@@ -196,7 +195,7 @@ export class FoodsController extends BaseSQLController {
 	 */
 	deleteFood(req, res) {
 		const { id } = req.params;
-		const query = `DELETE FROM foods WHERE id = ?`;
+		const query = `DELETE FROM food WHERE id = ?`;
 
 		this.delete(
 			query,

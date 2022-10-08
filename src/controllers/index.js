@@ -5,7 +5,7 @@ export * from './nutritionists.js';
 export * from './pathologies.js';
 export * from './allergies.js';
 export * from './daily_diets.js';
-export * from './foods.js';
+export * from './food.js';
 export * from './dishes.js';
 export * from './diets.js';
 export * from './user_notes.js';

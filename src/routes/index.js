@@ -6,7 +6,7 @@ import { setUserRoutes } from './users.js';
 import { setPathologiesRoutes } from './pathologies.js';
 import { setDailyDietsRoutes } from './daily_diets.js';
 import { setAllergiesRoutes } from './allergies.js';
-import { setFoodsRoutes } from './foods.js';
+import { setFoodsRoutes } from './food.js';
 import { setDishesRoutes } from './dishes.js';
 import { setDietsRoutes } from './diets.js';
 import { setUserNotesRoutes } from './notes.js';
