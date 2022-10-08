@@ -33,7 +33,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/users/user/testUser",
+							"raw": "localhost:8000/users/user/patient1",
 							"host": [
 								"localhost"
 							],
@@ -41,7 +41,7 @@
 							"path": [
 								"users",
 								"user",
-								"testUser"
+								"patient1"
 							]
 						}
 					},
@@ -53,13 +53,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/users",
+							"raw": "localhost:8000/users/all",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"users"
+								"users",
+								"all"
 							]
 						}
 					},
@@ -101,14 +102,14 @@
 							"raw": "{\r\n    \"first_name\": \"Nutri\",\r\n    \"last_name\": \"Tionist\",\r\n    \"phone_number\": \"6578347892\",\r\n    \"birth_date\": null,\r\n    \"profile_image\": null,\r\n    \"isNutritionist\": true,\r\n    \"isPatient\": false\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8000/users/update-measure/1",
+							"raw": "localhost:8000/users/update/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"users",
-								"update-measure",
+								"update",
 								"1"
 							]
 						}
@@ -261,7 +262,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/users/delete-measure/13",
+							"raw": "localhost:8000/users/delete-measure/1",
 							"host": [
 								"localhost"
 							],
@@ -269,7 +270,7 @@
 							"path": [
 								"users",
 								"delete-measure",
-								"13"
+								"1"
 							]
 						}
 					},
@@ -429,13 +430,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/pathologies",
+							"raw": "localhost:8000/pathologies/all",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"pathologies"
+								"pathologies",
+								"all"
 							]
 						}
 					},
@@ -570,13 +572,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/allergies",
+							"raw": "localhost:8000/allergies/all",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"allergies"
+								"allergies",
+								"all"
 							]
 						}
 					},
@@ -701,13 +704,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/notes",
+							"raw": "localhost:8000/notes/all",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"notes"
+								"notes",
+								"all"
 							]
 						}
 					},
@@ -796,18 +800,165 @@
 			"name": "Food",
 			"item": [
 				{
-					"name": "Food Get All",
+					"name": "Category",
+					"item": [
+						{
+							"name": "Category Get All",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/food/category/all",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"food",
+										"category",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category Get by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/food/category/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"food",
+										"category",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category Get by Name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/food/category/single/carnes rojas",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"food",
+										"category",
+										"single",
+										"carnes rojas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Carnes rojas\",\r\n    \"description\": \"La OMS señala como carne roja aquella obtenida de mamíferos como res, ternera, cerdo, cordero, caballo, cabra, entre otros, mientras que en las procesadas entran salchichas, carnes tratadas, curadas o ahumadas\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8000/food/category/create",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"food",
+										"category",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"name\": \"Carne\",\r\n            \"description\": \"La carne es el tejido animal, principalmente muscular, que se consume como alimento.​Se trata de una clasificación coloquial y comercial que solo se aplica a animales terrestres\"\r\n        }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8000/food/category/update/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"food",
+										"category",
+										"update",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Category Delete by ID",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/food",
+							"raw": "localhost:8000/food/category/delete/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"food"
+								"food",
+								"category",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Food Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/food/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"food",
+								"all"
 							]
 						}
 					},
@@ -827,6 +978,26 @@
 							"path": [
 								"food",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category Get by Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/food/single/arveja",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"food",
+								"single",
+								"arveja"
 							]
 						}
 					},
