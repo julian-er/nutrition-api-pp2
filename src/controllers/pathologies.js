@@ -1,10 +1,8 @@
-
 import { mysqlConnection } from '../database.js';
 import BaseSQLController from './base-sql.js';
 
-
 export class PathologiesController extends BaseSQLController {
-    /**
+	/**
 	 * @param {string} SingularEntityId The entity ID
 	 * @param {string} PluralEntityId The entity ID
 	 */
@@ -14,7 +12,7 @@ export class PathologiesController extends BaseSQLController {
 		this.SingularEntityId = SingularEntityId ? SingularEntityId : 'pathology';
 	}
 
-    //#region Get Methods
+	//#region Get Methods
 
 	/**
 	 * Gets all the pathologies
@@ -22,27 +20,28 @@ export class PathologiesController extends BaseSQLController {
 	 * @param {Response} res The Express response
 	 */
 	getPathologies(_req, res) {
-		const query = `SELECT * FROM pathologies`;
+		const query = `SELECT * FROM pathology`;
 
 		this.getAll(
 			query,
-			response => res.status(200).json({
-				success: true,
-				message: response.message,
-				httpStatusCode: 200,
-				response: response
-			}),
-			error => res.status(500).json({
-				success: false,
-				message: error.message,
-				httpStatusCode: 500,
-				response: error.error
-			})
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
-
-    /**
+	/**
 	 * Gets a Patolofy by ID
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
@@ -54,18 +53,20 @@ export class PathologiesController extends BaseSQLController {
 		this.getById(
 			query,
 			id,
-			response => res.status(200).json({
-				success: true,
-				message: '',
-				httpStatusCode: 200,
-				response: response
-			}),
-			error => res.status(500).json({
-				success: false,
-				message: error.message,
-				httpStatusCode: 500,
-				response: error.error
-			})
+			response =>
+				res.status(200).json({
+					success: true,
+					message: '',
+					httpStatusCode: 200,
+					response: response
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
@@ -75,12 +76,12 @@ export class PathologiesController extends BaseSQLController {
 	 * @param {Response} res The Express response
 	 */
 
-    async getPathologyByNameMethods(req, res) {
-		const query = 'SELECT * FROM pathologies WHERE pathology_name= ?';
-		const { pathology_name } = req;
+	async getPathologyByNameMethod(req, res) {
+		const query = 'SELECT * FROM pathology WHERE name= ?';
+		const { name } = req;
 
 		return new Promise((resolve, reject) => {
-			mysqlConnection.query(query, [pathology_name], (error, rows, _fields) => {
+			mysqlConnection.query(query, [name], (error, rows, _fields) => {
 				if (!error) {
 					resolve(rows);
 				} else {
@@ -97,46 +98,68 @@ export class PathologiesController extends BaseSQLController {
 		});
 	}
 
+	async getPathologyByName(req, res) {
+		const { name } = req;
+		const pathology = await this.getPathologyByNameMethod(req, res);
+		if (pathology) {
+			if (pathology.length) {
+				res.status(200).json({
+					success: true,
+					message: '',
+					httpStatusCode: 200,
+					response: pathology[0]
+				});
+			} else {
+				res.status(404).json({
+					success: false,
+					message: `Sorry ${this.SingularEntityId} with name: ${name} not found`,
+					httpStatusCode: 404,
+					response: pathology
+				});
+			}
+		}
+	}
 	//#endregion
 
 	//#region Create Methods
 
-
-        /**
-	    * Creates a pathology
-	    * @param {Request} req The Express request
-	    * @param {Response} res The Express response
-	    */
+	/**
+	 * Creates a pathology
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
+	 */
 	async createPathology(req, res) {
-		const query = `INSERT INTO pathologies ( pathology_name, description) VALUES  (?, ?)`;
-		const { pathology_name, description } = req.body;
-        const name = await this.getPathologyByNameMethods({ pathology_name: pathology_name }, res);
-		if (name && name.length) {
+		const query = `INSERT INTO pathology ( name, description) VALUES  (?, ?)`;
+		const { name, description } = req.body;
+		const pathology = await this.getPathologyByNameMethod({ name: name }, res);
+		if (pathology && pathology.length) {
 			res.status(409).json({
 				message: 'The pathology already exists'
 			});
 		} else {
-					this.create(
-					query,
-					[pathology_name, description],
-					response => res.status(200).json({
+			this.create(
+				query,
+				[name, description],
+				response =>
+					res.status(200).json({
 						success: true,
 						message: response.message,
 						httpStatusCode: 200,
 						response: []
 					}),
-					error => res.status(500).json({
+				error =>
+					res.status(500).json({
 						success: false,
 						message: error.message,
 						httpStatusCode: 500,
 						response: error.error
 					})
-				);
-        }
-    }
+			);
+		}
+	}
 	//#endregion
 
-    //#region EDIT methods
+	//#region EDIT methods
 
 	/**
 	 * Edits a users
@@ -145,25 +168,27 @@ export class PathologiesController extends BaseSQLController {
 	 */
 	editPathology(req, res) {
 		const { id } = req.params;
-		const { pathology_name, description } = req.body;
+		const { name, description } = req.body;
 
-		const query = `UPDATE pathologies SET  pathology_name = ?, description = ?  WHERE id = ?`;
+		const query = `UPDATE pathology SET  name = ?, description = ?  WHERE id = ?`;
 
 		this.edit(
 			query,
-			[pathology_name, description, id],
-			response => res.status(200).json({
-				success: true,
-				message: response.message,
-				httpStatusCode: 200,
-				response: []
-			}),
-			error => res.status(500).json({
-				success: false,
-				message: error.message,
-				httpStatusCode: 500,
-				response: error.error
-			})
+			[name, description, id],
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
 
@@ -171,35 +196,32 @@ export class PathologiesController extends BaseSQLController {
 
 	//#region DELETE Methods
 
-    /**
+	/**
 	 * Deletes a users
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
 	deletePathology(req, res) {
 		const { id } = req.params;
-		const query = `DELETE FROM pathologies WHERE id = ?`;
+		const query = `DELETE FROM pathology WHERE id = ?`;
 
 		this.delete(
 			query,
 			id,
-			response => res.status(200).json({
-				success: true,
-				message: response.message,
-				httpStatusCode: 200,
-				response: []
-			}),
-			error => res.status(500).json({
-				success: false,
-				message: error.message,
-				httpStatusCode: 500,
-				response: error.error
-			})
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
 		);
 	}
-
-}  
-
-
-
-
+}
