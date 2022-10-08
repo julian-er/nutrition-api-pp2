@@ -13,7 +13,7 @@ export class AllergiesController extends BaseSQLController {
 	}
 
 	getAllergies(_req, res) {
-		const query = `SELECT * FROM allergies`;
+		const query = `SELECT * FROM allergy`;
 		this.getAll(
 			query,
 			response =>
@@ -34,7 +34,7 @@ export class AllergiesController extends BaseSQLController {
 	}
 
 	getAllergyById(req, res) {
-		const query = `SELECT * FROM allergies WHERE id = ? `;
+		const query = `SELECT * FROM allergy WHERE id = ? `;
 		const { id } = req.params;
 
 		this.getById(
@@ -64,11 +64,11 @@ export class AllergiesController extends BaseSQLController {
 	 */
 
 	async getByAllergyNameMethod(req, res) {
-		const query = 'SELECT * FROM allergies WHERE allergy_name = ?';
-		const { allergy_name } = req;
+		const query = 'SELECT * FROM allergy WHERE name = ?';
+		const { name } = req;
 
 		return new Promise((resolve, reject) => {
-			mysqlConnection.query(query, [allergy_name], (error, rows, _fields) => {
+			mysqlConnection.query(query, [name], (error, rows, _fields) => {
 				if (!error) {
 					resolve(rows);
 				} else {
@@ -86,7 +86,7 @@ export class AllergiesController extends BaseSQLController {
 	}
 
 	async getAllergyByName(req, res) {
-		const { allergy_name } = req;
+		const { name } = req;
 		const allergy = await this.getByAllergyNameMethod(req, res);
 		if (allergy) {
 			if (allergy.length) {
@@ -99,7 +99,7 @@ export class AllergiesController extends BaseSQLController {
 			} else {
 				res.status(404).json({
 					success: false,
-					message: `Sorry ${this.SingularEntityId} with name: ${allergy_name} not found`,
+					message: `Sorry ${this.SingularEntityId} with name: ${name} not found`,
 					httpStatusCode: 404,
 					response: allergy
 				});
@@ -114,9 +114,9 @@ export class AllergiesController extends BaseSQLController {
 	 */
 
 	async createAllergy(req, res) {
-		const query = `INSERT INTO allergies ( allergy_name, description) VALUES  (?, ?)`;
-		const { allergy_name, description } = req.body;
-		const allergyByAllergyName = await this.getByAllergyNameMethod({ allergy_name: allergy_name }, res);
+		const query = `INSERT INTO allergy ( name, description) VALUES  (?, ?)`;
+		const { name, description } = req.body;
+		const allergyByAllergyName = await this.getByAllergyNameMethod({ name: name }, res);
 
 		if (allergyByAllergyName && allergyByAllergyName.length) {
 			res.status(409).json({
@@ -128,7 +128,7 @@ export class AllergiesController extends BaseSQLController {
 		} else {
 			this.create(
 				query,
-				[allergy_name, description],
+				[name, description],
 				response =>
 					res.status(200).json({
 						success: true,
@@ -155,11 +155,11 @@ export class AllergiesController extends BaseSQLController {
 
 	editAllergy(req, res) {
 		const { id } = req.params;
-		const query = 'UPDATE allergies SET allergy_name = ?, description= ? WHERE id = ?;';
-		const { allergy_name, description } = req.body;
+		const query = 'UPDATE allergy SET name = ?, description= ? WHERE id = ?;';
+		const { name, description } = req.body;
 		this.edit(
 			query,
-			[allergy_name, description, id],
+			[name, description, id],
 			response =>
 				res.status(200).json({
 					success: true,
@@ -185,7 +185,7 @@ export class AllergiesController extends BaseSQLController {
 
 	deleteAllergy(req, res) {
 		const { id } = req.params;
-		const query = `DELETE FROM allergies WHERE id = ?`;
+		const query = `DELETE FROM allergy WHERE id = ?`;
 
 		this.delete(
 			query,
