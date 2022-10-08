@@ -7,9 +7,9 @@ export class UserNotesController extends BaseSQLController {
 	 * @param {string} PluralEntityId The entity ID
 	 */
 	constructor(SingularEntityId, PluralEntityId) {
-		super(SingularEntityId ?? 'user_note', PluralEntityId ?? 'user_notes');
-		this.PluralEntityId = PluralEntityId ? PluralEntityId : 'user_notes';
-		this.SingularEntityId = SingularEntityId ? SingularEntityId : 'user_note';
+		super(SingularEntityId ?? 'note', PluralEntityId ?? 'notes');
+		this.PluralEntityId = PluralEntityId ? PluralEntityId : 'notes';
+		this.SingularEntityId = SingularEntityId ? SingularEntityId : 'note';
 	}
 
 	//#region Get Methods
@@ -20,7 +20,7 @@ export class UserNotesController extends BaseSQLController {
 	 * @param {Response} res The Express response
 	 */
 	getUserNotes(_req, res) {
-		const query = `SELECT * FROM user_notes`;
+		const query = `SELECT * FROM note`;
 		this.getAll(
 			query,
 			response =>
@@ -41,52 +41,18 @@ export class UserNotesController extends BaseSQLController {
 	}
 
 	/**
-	 * Gets an entry by name from any given entity
-	 * @param {Request} req The Express request need to have a email
-	 * @param {Response} res The Express response
-	 */
-
-	async getUserNotesByNameMethod(req, res) {
-		const query = 'SELECT * FROM user_notes WHERE note_name = ?';
-		const { note_name } = req;
-
-		return new Promise((resolve, reject) => {
-			mysqlConnection.query(query, [note_name], (error, rows, _fields) => {
-				if (!error) {
-					resolve(rows);
-				} else {
-					reject(
-						res
-							.status({
-								success: false,
-								message: error.message,
-								httpStatusCode: 500,
-								response: error.error
-							})
-							.json({
-								message: 'Sorry we have an unexpected error trying fetch note name',
-								error: user.sqlMessage
-							})
-					);
-				}
-			});
-		});
-	}
-
-	/**
 	 * Creates an user note
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
 
 	async createUserNotes(req, res) {
-		const query = `INSERT INTO user_notes ( note_name, user1_id, user2_id, note_date, content ) VALUES  (?, ?, ?, ?, ?)`;
-		const { note_name, user1_id, user2_id, note_date, content } = req.body;
-		const noteByNoteName = await this.getUserNotesByNameMethod({ note_name: note_name }, res);
+		const query = `INSERT INTO note ( title, date, content ) VALUES  (?, ?, ?)`;
+		const { title, date, content } = req.body;
 
 		this.create(
 			query,
-			[note_name, user1_id, user2_id, note_date, content],
+			[title, date, content],
 			response =>
 				res.status(200).json({
 					success: true,
@@ -112,11 +78,11 @@ export class UserNotesController extends BaseSQLController {
 
 	editUserNote(req, res) {
 		const { id } = req.params;
-		const query = 'UPDATE user_notes SET note_name = ?, user1_id = ?, user2_id = ?, note_date = ?, content = ? WHERE id = ?;';
-		const { note_name, user1_id, user2_id, note_date, content } = req.body;
+		const query = 'UPDATE note SET title = ?, date = ?, content = ? WHERE id = ?;';
+		const { title, date, content } = req.body;
 		this.edit(
 			query,
-			[note_name, user1_id, user2_id, note_date, content, id],
+			[title, date, content, id],
 			response =>
 				res.status(200).json({
 					success: true,
@@ -142,7 +108,7 @@ export class UserNotesController extends BaseSQLController {
 
 	deleteUserNote(req, res) {
 		const { id } = req.params;
-		const query = `DELETE FROM user_notes WHERE id = ?`;
+		const query = `DELETE FROM note WHERE id = ?`;
 
 		this.delete(
 			query,

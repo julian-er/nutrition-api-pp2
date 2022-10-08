@@ -9,7 +9,7 @@ import { setAllergiesRoutes } from './allergies.js';
 import { setFoodsRoutes } from './foods.js';
 import { setDishesRoutes } from './dishes.js';
 import { setDietsRoutes } from './diets.js';
-import { setUserNotesRoutes } from './user_notes.js';
+import { setUserNotesRoutes } from './notes.js';
 
 const router = Router();
 
