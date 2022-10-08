@@ -1,5 +1,4 @@
-import { mysqlConnection } from '../database.js';
-import BaseSQLController from './base-sql.js';
+import BaseSQLController from '../base-sql.js';
 
 export class UserNotesController extends BaseSQLController {
 	/**

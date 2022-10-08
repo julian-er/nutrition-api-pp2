@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { PathologiesController } from '../controllers/index.js';
+import { PathologiesController } from '../../controllers/index.js';
 
 /**
  * Sets the Patients routes
@@ -8,7 +8,7 @@ import { PathologiesController } from '../controllers/index.js';
 export function setPathologiesRoutes(router) {
 	const controller = new PathologiesController();
 
-	router.get('/pathologies', (req, res) => controller.getPathologies(req, res));
+	router.get('/pathologies/all', (req, res) => controller.getPathologies(req, res));
 	router.get('/pathologies/:id', (req, res) => controller.getPathologyById(req, res));
 	router.get('/pathologies/pathology/:name', (req, res) => controller.getPathologyByName({ name: req.params.name }, res));
 	router.post('/pathologies/create', (req, res) => controller.createPathology(req, res));

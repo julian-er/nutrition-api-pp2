@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { NutritionistsController } from '../controllers/index.js';
+import { NutritionistsController } from '../../controllers/index.js';
 
 /**
  * Sets the Nutritionists routes

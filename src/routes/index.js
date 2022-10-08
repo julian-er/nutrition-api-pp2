@@ -1,12 +1,18 @@
 import { Router } from 'express';
+
+import { setUserRoutes } from './users/users.js';
+import { setPatientsRoutes } from './users/patients.js';
+import { setNutritionistsRoutes } from './users/nutritionists.js';
+
+import { setFoodsRoutes } from './food/food.js';
+import { setFoodsCategoryRoutes } from './food/food_category.js';
+
+
+import { setPathologiesRoutes } from './health/pathologies.js';
+import { setAllergiesRoutes } from './health/allergies.js';
+
 import { setLogInRoutes } from './login.js';
-import { setNutritionistsRoutes } from './nutritionists.js';
-import { setPatientsRoutes } from './patients.js';
-import { setUserRoutes } from './users.js';
-import { setPathologiesRoutes } from './pathologies.js';
 import { setDailyDietsRoutes } from './daily_diets.js';
-import { setAllergiesRoutes } from './allergies.js';
-import { setFoodsRoutes } from './food.js';
 import { setDishesRoutes } from './dishes.js';
 import { setDietsRoutes } from './diets.js';
 import { setUserNotesRoutes } from './notes.js';
@@ -22,6 +28,7 @@ export function setRouter() {
 	setAllergiesRoutes(router);
 	setDailyDietsRoutes(router);
 	setFoodsRoutes(router);
+	setFoodsCategoryRoutes(router);
 	setDishesRoutes(router);
 	setDietsRoutes(router);
 	setUserNotesRoutes(router);

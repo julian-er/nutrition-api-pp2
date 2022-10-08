@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { PatientsController } from '../controllers/index.js';
+import { PatientsController } from '../../controllers/index.js';
 
 /**
  * Sets the Patients routes

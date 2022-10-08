@@ -1,5 +1,5 @@
-import { mysqlConnection } from '../database.js';
-import BaseSQLController from './base-sql.js';
+import { mysqlConnection } from '../../database.js';
+import BaseSQLController from '../base-sql.js';
 
 export class AllergiesController extends BaseSQLController {
 	/**

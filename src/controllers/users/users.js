@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
-import { mysqlConnection } from '../database.js';
-import BaseSQLController from './base-sql.js';
+import { mysqlConnection } from '../../database.js';
+import BaseSQLController from '../base-sql.js';
 
 export class UsersController extends BaseSQLController {
 	/**

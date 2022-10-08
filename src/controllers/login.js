@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { UsersController } from './users.js';
+import { UsersController } from './users/users.js';
 import { generateAccessToken } from '../services/jwt-services.js';
 
 export class LogInController extends UsersController {

@@ -1,27 +1,25 @@
-import { mysqlConnection } from '../database.js';
-import BaseSQLController from './base-sql.js';
+import { mysqlConnection } from '../../database.js';
+import BaseSQLController from '../base-sql.js';
 
-export class PathologiesController extends BaseSQLController {
+export class FoodCategoryController extends BaseSQLController {
 	/**
 	 * @param {string} SingularEntityId The entity ID
 	 * @param {string} PluralEntityId The entity ID
 	 */
 	constructor(SingularEntityId, PluralEntityId) {
-		super(SingularEntityId ?? 'pathology', PluralEntityId ?? 'pathologies');
-		this.PluralEntityId = PluralEntityId ? PluralEntityId : 'pathologies';
-		this.SingularEntityId = SingularEntityId ? SingularEntityId : 'pathology';
+		super(SingularEntityId ?? 'category', PluralEntityId ?? 'categories');
+		this.PluralEntityId = PluralEntityId ? PluralEntityId : 'categories';
+		this.SingularEntityId = SingularEntityId ? SingularEntityId : 'category';
 	}
 
 	//#region Get Methods
-
 	/**
-	 * Gets all the pathologies
-	 * @param {Request} _req The Express request
+	 * Gets all food category
+	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
-	getPathologies(_req, res) {
-		const query = `SELECT * FROM pathology`;
-
+	getFoodCategories(_req, res) {
+		const query = `SELECT * FROM food_category`;
 		this.getAll(
 			query,
 			response =>
@@ -42,13 +40,13 @@ export class PathologiesController extends BaseSQLController {
 	}
 
 	/**
-	 * Gets a Patolofy by ID
+	 * Gets food category by id
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
-	getPathologyById(req, res) {
-		const query = `SELECT * FROM pathology WHERE id = ? `;
-		const { id } = req.params; // Also you can use this other notation req.params.id to see the param
+	getFoodCategoryById(req, res) {
+		const query = `SELECT * FROM food_category WHERE id = ? `;
+		const { id } = req.params;
 
 		this.getById(
 			query,
@@ -61,23 +59,17 @@ export class PathologiesController extends BaseSQLController {
 					response: response
 				}),
 			error =>
-				res.status(500).json({
+				res.status(404).json({
 					success: false,
 					message: error.message,
-					httpStatusCode: 500,
+					httpStatusCode: 404,
 					response: error.error
 				})
 		);
 	}
 
-	/**
-	 * Gets an entry by name from any given entity
-	 * @param {Request} req The Express request need to have a email
-	 * @param {Response} res The Express response
-	 */
-
-	async getPathologyByNameMethod(req, res) {
-		const query = 'SELECT * FROM pathology WHERE name= ?';
+	async getFoodCategoryByNameMethod(req, res) {
+		const query = 'SELECT * FROM food_category WHERE name= ?';
 		const { name } = req;
 
 		return new Promise((resolve, reject) => {
@@ -88,8 +80,8 @@ export class PathologiesController extends BaseSQLController {
 					reject(
 						res.status(500).json({
 							success: false,
-							message: 'Sorry, we got an unexpected error trying to get the pathology by name',
-							httpStatusCode: 500,
+							message: `Sorry ${this.SingularEntityId} with name: ${name} not found`,
+							httpStatusCode: 404,
 							response: error.sqlMessage
 						})
 					);
@@ -98,43 +90,47 @@ export class PathologiesController extends BaseSQLController {
 		});
 	}
 
-	async getPathologyByName(req, res) {
+	async getFoodCategoryByName(req, res) {
 		const { name } = req;
-		const pathology = await this.getPathologyByNameMethod(req, res);
-		if (pathology) {
-			if (pathology.length) {
+		const food = await this.getFoodCategoryByNameMethod(req, res);
+		if (food) {
+			if (food.length) {
 				res.status(200).json({
 					success: true,
 					message: '',
 					httpStatusCode: 200,
-					response: pathology[0]
+					response: food[0]
 				});
 			} else {
 				res.status(404).json({
 					success: false,
 					message: `Sorry ${this.SingularEntityId} with name: ${name} not found`,
 					httpStatusCode: 404,
-					response: pathology
+					response: food
 				});
 			}
 		}
 	}
+
 	//#endregion
 
-	//#region Create Methods
+	//#region POST methods
 
 	/**
-	 * Creates a pathology
+	 * Creates a food
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
-	async createPathology(req, res) {
-		const query = `INSERT INTO pathology ( name, description) VALUES  (?, ?)`;
+	async createCategoryFood(req, res) {
+		const query = 'INSERT INTO food_category (name, description) VALUES(?, ?)';
 		const { name, description } = req.body;
-		const pathology = await this.getPathologyByNameMethod({ name: name }, res);
-		if (pathology && pathology.length) {
+		const food_name = await this.getFoodCategoryByNameMethod({ name: name }, res);
+		if (food_name && food_name.length) {
 			res.status(409).json({
-				message: 'The pathology already exists'
+				success: false,
+				message: 'The category name is already in use',
+				httpStatusCode: 409,
+				response: []
 			});
 		} else {
 			this.create(
@@ -157,21 +153,20 @@ export class PathologiesController extends BaseSQLController {
 			);
 		}
 	}
+
 	//#endregion
 
-	//#region EDIT methods
-
+	//#region edit methods
 	/**
-	 * Edits a users
+	 * Edits a category
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
-	editPathology(req, res) {
+
+	editCategory(req, res) {
 		const { id } = req.params;
+		const query = 'UPDATE food_category SET name = ?, description= ?  WHERE id = ?;';
 		const { name, description } = req.body;
-
-		const query = `UPDATE pathology SET  name = ?, description = ?  WHERE id = ?`;
-
 		this.edit(
 			query,
 			[name, description, id],
@@ -191,19 +186,18 @@ export class PathologiesController extends BaseSQLController {
 				})
 		);
 	}
-
 	//#endregion
 
-	//#region DELETE Methods
+		//#region DELETE methods
 
 	/**
-	 * Deletes a users
+	 * Deletes a category
 	 * @param {Request} req The Express request
 	 * @param {Response} res The Express response
 	 */
-	deletePathology(req, res) {
+	 deleteCategory(req, res) {
 		const { id } = req.params;
-		const query = `DELETE FROM pathology WHERE id = ?`;
+		const query = `DELETE FROM food_category WHERE id = ?`;
 
 		this.delete(
 			query,
@@ -224,4 +218,5 @@ export class PathologiesController extends BaseSQLController {
 				})
 		);
 	}
+	//#endregion
 }
