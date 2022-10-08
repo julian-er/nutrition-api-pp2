@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS day (
 
 /* relates to user */
 
-CREATE TABLE IF NOT EXISTS user_alergies (
+CREATE TABLE IF NOT EXISTS user_allergies (
 	id INT NOT NULL AUTO_INCREMENT,
 	allergy_id INT NOT NULL,
 	user_id INT NOT NULL,
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS nutritionist_patients_relation (
 );
 
 /* relates to food */
-CREATE TABLE IF NOT EXISTS food_alergies (
+CREATE TABLE IF NOT EXISTS food_allergies (
 	id INT NOT NULL AUTO_INCREMENT,
 	allergy_id INT NOT NULL,
 	food_id INT NOT NULL,
