@@ -41,7 +41,13 @@ INSERT INTO food_category
 VALUES
 	("vegetales", "Las verduras son hortalizas cuyo color predominante es el verde.​ Sin embargo, el uso popular suele extender su significado a otras partes comestibles de las plantas");
 
-
+INSERT INTO dish
+  (date, title, day_part_id)
+VALUES
+  ("2022-10-08", "Merienda pre entreno", 5),
+  ("2022-10-08", "Merienda sin entreno", 5),
+  ("2022-10-08", "Desayuno liviano", 1),
+  ("2022-10-08", "Media mañana", 2);
 
 -- CREATE ALLWAYS !
 INSERT INTO measurement_unit 
