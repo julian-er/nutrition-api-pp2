@@ -14,7 +14,7 @@ Professionals of nutrition can manage CRUD for food, days, patients, dishes, not
 # 2. Structure
 
 The folder structure was created with the best way to find the code in mind. It has a database folder where you can see SQL files to create the database and some test inserts (warning: both "unit_of_measure" and "part_of_day" inserts are fixed and must always be done in your database for this to work correctly)
-
+<pre>
 :file_folder: node_modules
 :open_file_folder: database
 │ :page_facing_up:── creation_scripts.sql
@@ -22,16 +22,16 @@ The folder structure was created with the best way to find the code in mind. It 
 :open_file_folder: src
 │ :open_file_folder:controllers
 │ ├──:open_file_folder: food
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├──:page_facing_up: food_category.js
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──:page_facing_up: food.js
+│ │├──:page_facing_up: food_category.js
+│ │└──:page_facing_up: food.js
 │ ├──:open_file_folder: health
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├──:page_facing_up: allergies.js
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──:page_facing_up: pathologies.js
+│ │├──:page_facing_up: allergies.js
+│ │└──:page_facing_up: pathologies.js
 │ ├──:open_file_folder: users
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├──:page_facing_up: nutritionists.js
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├──:page_facing_up: patients.js
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├──:page_facing_up: user_notes.js
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──:page_facing_up: users.js
+│ │├──:page_facing_up: nutritionists.js
+│ │├──:page_facing_up: patients.js
+│ │├──:page_facing_up: user_notes.js
+│ │└──:page_facing_up: users.js
 │ ├──:page_facing_up: base-sql.js
 │ ├──:page_facing_up: day.js
 │ ├──:page_facing_up: dish.js
@@ -41,15 +41,15 @@ The folder structure was created with the best way to find the code in mind. It 
 │ ├──:page_facing_up: index.js
 │ :open_file_folder:routes
 │ ├──:open_file_folder: food
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├──:page_facing_up: food_category.js
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──:page_facing_up: food.js
+│ │├──:page_facing_up: food_category.js
+│ │└──:page_facing_up: food.js
 │ ├──:open_file_folder: health
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├──:page_facing_up: allergies.js
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──:page_facing_up: pathologies.js
+│ │├──:page_facing_up: allergies.js
+│ │└──:page_facing_up: pathologies.js
 │ ├──:open_file_folder: users
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├──:page_facing_up: nutritionists.js
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├──:page_facing_up: patients.js
-│ │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──:page_facing_up: users.js
+│ │├──:page_facing_up: nutritionists.js
+│ │├──:page_facing_up: patients.js
+│ │└──:page_facing_up: users.js
 │ ├──:page_facing_up: day.js
 │ ├──:page_facing_up: dish.js
 │ ├──:page_facing_up: index.js
@@ -68,5 +68,5 @@ The folder structure was created with the best way to find the code in mind. It 
 :page_facing_up: package-lock.json
 :page_facing_up: package.json
 :page_facing_up: README
-
+</pre>
 The controller folder is where all the logic is managed for all routes, and then the routes folder is where these logics are called to a certain URL making your endpoints.
