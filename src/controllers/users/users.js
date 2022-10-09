@@ -12,7 +12,6 @@ export class UsersController extends BaseSQLController {
 		this.PluralEntityId = PluralEntityId ? PluralEntityId : 'users';
 		this.SingularEntityId = SingularEntityId ? SingularEntityId : 'user';
 	}
-
 	//#region Get Methods
 
 	/**
@@ -160,7 +159,6 @@ export class UsersController extends BaseSQLController {
 	getUserMeasures(req, res) {
 		const query = `SELECT * FROM user_measures_history WHERE user_id = ? `;
 		const { id } = req.params;
-
 		this.getById(
 			query,
 			id,

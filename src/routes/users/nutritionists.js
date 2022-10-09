@@ -7,6 +7,5 @@ import { NutritionistsController } from '../../controllers/index.js';
  */
 export function setNutritionistsRoutes(router) {
 	const controller = new NutritionistsController();
-
 	router.get('/nutritionists', (req, res) => controller.getNutritionists(req, res));
 }

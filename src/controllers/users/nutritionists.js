@@ -12,12 +12,11 @@ export class NutritionistsController extends UsersController {
 	 */
 	getNutritionists(req, res) {
 		const query = `SELECT * FROM users WHERE isNutritionist = true`;
-
 		this.getAll(
 			query,
 			response => res.status(200).json(response),
 			error => res.status(500).json(error)
 		);
 	}
-
 }
+
