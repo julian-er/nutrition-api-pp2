@@ -921,29 +921,29 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Category Delete by ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/food/category/delete/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"food",
+										"category",
+										"delete",
+										"2"
+									]
+								}
+							},
+							"response": []
 						}
 					]
-				},
-				{
-					"name": "Category Delete by ID",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/food/category/delete/2",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"food",
-								"category",
-								"delete",
-								"2"
-							]
-						}
-					},
-					"response": []
 				},
 				{
 					"name": "Food Get All",
@@ -1076,6 +1076,254 @@
 								"food",
 								"create",
 								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dish",
+			"item": [
+				{
+					"name": "Dishes All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/dish/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"dish",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dish by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/dish/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"dish",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dish Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2020-03-22\",\r\n    \"title\": \"Almuerzo con mucho hierro\",\r\n    \"day_part_id\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/dish/update/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"dish",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dish Creation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2020-03-22\",\r\n    \"title\": \"Almuerzo con mucho hierro\",\r\n    \"day_part_id\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/dish/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"dish",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dish Delete by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/dish/delete/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"dish",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Day",
+			"item": [
+				{
+					"name": "Day All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/day/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"day",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Day by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/day/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"day",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Day Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2022-10-09\",\r\n    \"title\": \"Test day\",\r\n    \"description\": \"It's only for test\",\r\n    \"user_id\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/day/update/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"day",
+								"update",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Day Creation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2022-10-09\",\r\n    \"title\": \"Test day\",\r\n    \"description\": \"It's only for test\",\r\n    \"user_id\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/day/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"day",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Day Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/day/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"day",
+								"5"
 							]
 						}
 					},
