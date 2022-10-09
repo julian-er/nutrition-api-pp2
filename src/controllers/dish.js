@@ -1,8 +1,6 @@
-import { response } from 'express';
-import { mysqlConnection } from '../database.js';
 import BaseSQLController from './base-sql.js';
 
-export class DishesController extends BaseSQLController {
+export class DishController extends BaseSQLController {
 	/**
 	 * @param {string} SingularEntityId The entity ID
 	 * @param {string} PluralEntityId The entity ID
@@ -21,7 +19,7 @@ export class DishesController extends BaseSQLController {
 	 */
 
 	getDishes(_req, res) {
-		const query = `SELECT * FROM dishes`;
+		const query = `SELECT * FROM dish`;
 		this.getAll(
 			query,
 			response =>
@@ -43,7 +41,7 @@ export class DishesController extends BaseSQLController {
 
 	getDishById(req, res) {
 		const { id } = req.params;
-		const query = 'SELECT * FROM dishes WHERE id=?';
+		const query = 'SELECT * FROM dish WHERE id=?';
 		this.getById(
 			query,
 			[id],
@@ -73,12 +71,11 @@ export class DishesController extends BaseSQLController {
 	 */
 
 	createDish(req, res) {
-		const query =
-			'INSERT INTO dishes (dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)';
-		const { dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id } = req.body;
+		const query = 'INSERT INTO dish (date, title, day_part_id) VALUES(?,?,?)';
+		const { date, title, day_part_id } = req.body;
 		this.create(
 			query,
-			[dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id],
+			[date, title, day_part_id],
 			response =>
 				res.status(200).json({
 					success: true,
@@ -106,11 +103,11 @@ export class DishesController extends BaseSQLController {
 	editDish(req, res) {
 		const { id } = req.params;
 		const query =
-			'UPDATE dishes SET dish_name=?, dish_size=?, units_total=?, description=?, food1_id=?, food2_id=?, food3_id=?, food4_id=?, food5_id=?, food6_id=?, food7_id=?, food8_id=?  WHERE id = ?;';
-		const { dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id } = req.body;
+			'UPDATE dish SET date=?, title=?, day_part_id=?  WHERE id = ?';
+		const { date, title, day_part_id } = req.body;
 		this.edit(
 			query,
-			[dish_name, dish_size, units_total, description, food1_id, food2_id, food3_id, food4_id, food5_id, food6_id, food7_id, food8_id, id],
+			[date, title, day_part_id, id],
 			response =>
 				res.status(200).json({
 					success: true,
@@ -137,7 +134,7 @@ export class DishesController extends BaseSQLController {
 
 	deleteDish(req, res) {
 		const { id } = req.params;
-		const query = 'DELETE FROM dishes WHERE id=?';
+		const query = 'DELETE FROM dish WHERE id=?';
 		this.delete(
 			query,
 			[id],
