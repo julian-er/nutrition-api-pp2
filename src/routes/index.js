@@ -12,7 +12,7 @@ import { setPathologiesRoutes } from './health/pathologies.js';
 import { setAllergiesRoutes } from './health/allergies.js';
 
 import { setLogInRoutes } from './login.js';
-import { setDailyDietsRoutes } from './daily_diets.js';
+import { setDayRoutes } from './day.js';
 import { setDishRoutes } from './dish.js';
 import { setUserNotesRoutes } from './notes.js';
 
@@ -25,7 +25,7 @@ export function setRouter() {
 	setLogInRoutes(router);
 	setPathologiesRoutes(router);
 	setAllergiesRoutes(router);
-	setDailyDietsRoutes(router);
+	setDayRoutes(router);
 	setFoodsRoutes(router);
 	setFoodsCategoryRoutes(router);
 	setDishRoutes(router);

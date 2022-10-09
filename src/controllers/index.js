@@ -6,6 +6,6 @@ export * from './food/food.js';
 export * from './food/food_category.js';
 export * from './health/pathologies.js';
 export * from './health/allergies.js';
-export * from './daily_diets.js';
+export * from './day.js';
 export * from './dish.js';
 export * from './login.js';
