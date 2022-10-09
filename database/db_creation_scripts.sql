@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS food_category (
 );
 
 /* All foods need to have unit of measurement  */
+/* No CRUD needed , only charge on SQL */
 CREATE TABLE IF NOT EXISTS measurement_unit (
     id INT NOT NULL AUTO_INCREMENT,
     unit_name VARCHAR(30) NOT NULL,
@@ -77,6 +78,7 @@ CREATE TABLE IF NOT EXISTS measurement_unit (
     PRIMARY KEY (id)
 );
 
+/* No CRUD needed , only charge on SQL */
 CREATE TABLE IF NOT EXISTS day_part (
 	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL,

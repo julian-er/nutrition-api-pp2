@@ -40,3 +40,26 @@ INSERT INTO food_category
 	(name, description)
 VALUES
 	("vegetales", "Las verduras son hortalizas cuyo color predominante es el verde.​ Sin embargo, el uso popular suele extender su significado a otras partes comestibles de las plantas");
+
+
+
+-- CREATE ALLWAYS !
+INSERT INTO measurement_unit 
+	(unit_name, description)
+VALUES 
+	  ("kg", "Kilogramo"),
+    ("g", "gramo"),
+    ("mg", "miligramo"),
+    ("l", "litro"),
+    ("ml", "mililitro"),
+    ("cm³", "centímetro cúbico");
+
+INSERT INTO day_part 
+	(name)
+VALUES 
+	  ("Mañana"),
+    ("Media Mañana"),
+    ("Mediodia"),
+    ("Media Tarde"),
+    ("Tarde"),
+    ("Noche");
