@@ -69,4 +69,19 @@ The folder structure was created with the best way to find the code in mind. It 
 ├── package.json
 └── README
 </pre>
+
+**References**
+-   **env-cmdrc** : contains all of your private environment variables
+    ```json
+    "development": {
+		"MYSQL_HOST": "host_url",
+		"MYSQL_ROOT_NAME": "user",
+		"MYSQL_PASSWORD": "password",
+		"MYSQL_DATABASE_NAME": "db_name",
+		"TOKEN_SECRET": "jwt-secret"
+	}
+    ```
+-   **Educate[...].postman_collection.json** : It's a postman collection for test the endpoints
+
+
 The controller folder is where all the logic is managed for all routes, and then the routes folder is where these logics are called to a certain URL making your endpoints.
