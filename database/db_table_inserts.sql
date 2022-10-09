@@ -49,6 +49,14 @@ VALUES
   ("2022-10-08", "Desayuno liviano", 1),
   ("2022-10-08", "Media mañana", 2);
 
+INSERT INTO day
+  (date, title, description, user_id)
+VALUES
+  ("2022-10-08", "Lunes", "Este dia puede reemplazarse con el del jueves o invertirse con el del martes" , 1),
+  ("2022-10-09", "Martes", "",  1),
+  ("2022-10-08", "Miercoles", "Receta de la tortilla de avena rapida en http://ejemplo.com/tortilla", 1),
+  ("2022-10-08", "Lunes", "Unico dia que no puede variar en alimentos",2);
+
 -- CREATE ALLWAYS !
 INSERT INTO measurement_unit 
 	(unit_name, description)
