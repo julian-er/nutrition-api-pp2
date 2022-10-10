@@ -1,5 +1,6 @@
 import BaseSQLController from '../base-sql.js';
 import { mysqlConnection } from '../../database.js';
+import { getDateFormat } from '../../helpers/index.js';
 
 export class UserNotesController extends BaseSQLController {
 	/**
@@ -70,7 +71,12 @@ export class UserNotesController extends BaseSQLController {
 					success: true,
 					message: response.message,
 					httpStatusCode: 200,
-					response: response[2]
+					response: response[2].map(note => {
+						return {
+							...note,
+							date: `${getDateFormat(note.date)}`
+						};
+					})
 				}),
 			error =>
 				res.status(500).json({
@@ -114,7 +120,12 @@ export class UserNotesController extends BaseSQLController {
 					success: true,
 					message: response.message,
 					httpStatusCode: 200,
-					response: response[2]
+					response: response[2].map(note => {
+						return {
+							...note,
+							date: `${getDateFormat(note.date)}`
+						};
+					})
 				}),
 			error =>
 				res.status(500).json({
