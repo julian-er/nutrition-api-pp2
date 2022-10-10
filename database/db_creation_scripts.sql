@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS user (
     last_name VARCHAR(60) NOT NULL,
     phone_number VARCHAR (50) DEFAULT NULL,
     birth_date DATE,
-    profile_image TEXT DEFAULT NULL, /* We are using base-64 for store images */
+    profile_image LONGTEXT DEFAULT NULL, /* We are using base-64 for store images */
     isNutritionist BOOLEAN DEFAULT false,
     isPatient BOOLEAN DEFAULT false,
     PRIMARY KEY (id)
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS food (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,
     description TEXT  DEFAULT NULL,
-    image TEXT DEFAULT NULL, /* We are using base-64 for store images */
+    image LONGTEXT DEFAULT NULL, /* We are using base-64 for store images */
 	PRIMARY KEY (id)
 );
 
@@ -70,7 +70,6 @@ CREATE TABLE IF NOT EXISTS food_category (
 );
 
 /* All foods need to have unit of measurement  */
-/* No CRUD needed , only charge on SQL */
 CREATE TABLE IF NOT EXISTS measurement_unit (
     id INT NOT NULL AUTO_INCREMENT,
     unit_name VARCHAR(30) NOT NULL,
@@ -78,7 +77,6 @@ CREATE TABLE IF NOT EXISTS measurement_unit (
     PRIMARY KEY (id)
 );
 
-/* No CRUD needed , only charge on SQL */
 CREATE TABLE IF NOT EXISTS day_part (
 	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL,
@@ -102,6 +100,7 @@ CREATE TABLE IF NOT EXISTS day (
     title VARCHAR(150) NOT NULL,
     description TEXT,
     user_id INT NOT NULL,
+    patient_id INT DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES user(id),
     PRIMARY KEY (id)
 );
