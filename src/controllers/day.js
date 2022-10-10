@@ -181,7 +181,7 @@ export class DayController extends BaseSQLController {
 	async getByUserIdMethod(req, res) {
 		const { user_id } = req;
 		/*Only with dishes > 0 , else do left join*/
-		const query = ` SELECT d.* , count(dd.id) 'totalDishes', u.first_name, u.last_name
+		const query = ` SELECT d.* , count(dd.id) 'totalDishes', u.first_name, u.last_name, u.profile_image
 						FROM day d
 						JOIN daily_dishes dd
 						on d.id = dd.day_id
