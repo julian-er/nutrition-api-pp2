@@ -41,6 +41,93 @@ export class UserNotesController extends BaseSQLController {
 	}
 
 	/**
+	 * Get only nutritionist Notes
+	 * @param {Request} _req The Express request
+	 * @param {Response} res The Express response
+	 */
+	async getOnlyNutritionistNotes(req, res) {
+		const { user_id } = req;
+		const query = `
+		DROP TEMPORARY TABLE IF EXISTS one_user_notes;
+
+		CREATE TEMPORARY TABLE one_user_notes
+		SELECT note_id, count(user_id), user_id
+		FROM user_note
+		group by note_id
+		having count(user_id) = 1;
+
+		SELECT n.id, n.title, n.date, n.content 
+		FROM one_user_notes oun
+		JOIN note n
+		ON oun.note_id = n.id
+		WHERE oun.user_id = ?`;
+
+		this.getById(
+			query,
+			[user_id],
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: response[2]
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
+		);
+	}
+
+	/**
+	 * Get only nutritionist Notes
+	 * @param {Request} _req The Express request
+	 * @param {Response} res The Express response
+	 */
+	async getMyPatientsNotes(req, res) {
+		const { user_id } = req;
+		const query = `
+			DROP TEMPORARY TABLE IF EXISTS patient_notes;
+
+			CREATE TEMPORARY TABLE patient_notes
+			SELECT note_id, count(user_id)
+			FROM user_note 
+			group by note_id
+			having count(user_id) > 1;
+			
+			SELECT  n.id, n.title, n.content, n.date
+			FROM patient_notes pn
+			JOIN user_note un
+			ON pn.note_id = un.note_id
+			JOIN note n
+			ON n.id = pn.note_id
+			WHERE un.user_id = ?`;
+
+		this.getById(
+			query,
+			[user_id],
+			response =>
+				res.status(200).json({
+					success: true,
+					message: response.message,
+					httpStatusCode: 200,
+					response: response[2]
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
+		);
+	}
+	//
+
+	/**
 	 * Gets all Notes
 	 * @param {Request} _req The Express request
 	 * @param {Response} res The Express response
@@ -66,7 +153,6 @@ export class UserNotesController extends BaseSQLController {
 				});
 			}
 		}
-
 	}
 
 	/**
@@ -182,7 +268,7 @@ export class UserNotesController extends BaseSQLController {
 					reject(
 						res.status(500).json({
 							success: false,
-							message: 'Sorry we have an unexpected error trying fetch user by user name',
+							message: 'Sorry we have an unexpected error trying fetch user dashboard',
 							httpStatusCode: 500,
 							response: error.sqlMessage
 						})
