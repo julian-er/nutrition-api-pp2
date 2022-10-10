@@ -11,7 +11,7 @@ export class PatientsController extends UsersController {
 	 * @param {Response} res The Express response
 	 */
 	getPatients(req, res) {
-		const query = `SELECT * FROM users WHERE isPatient = true`;
+		const query = `SELECT * FROM user WHERE isPatient = true`;
 
 		this.getAll(
 			query,
