@@ -82,16 +82,16 @@ VALUES
   ("2022-10-08", "Media mañana", 2);
   
 INSERT INTO day
-  (date, title, description, user_id)
+  (date, title, description, user_id, patient_id)
 VALUES
-  ("2022-09-08", "Lunes", "Este dia puede reemplazarse con el del jueves o invertirse con el del martes" , 1),
-  ("2022-09-08", "Martes", "",  1),
-  ("2022-09-08", "Miércoles", "Receta de la tortilla de avena rapida en http://ejemplo.com/tortilla", 1),
-  ("2022-10-08", "Lunes", "Unico dia que no puede variar en alimentos",3),
-  ("2022-10-09", "Miércoles", "Este dia puede reemplazarse con el del jueves o invertirse con el del martes" , 3),
-  ("2022-10-11", "Martes", "El paciente es nutricionista, sabe variar su alimento",  4),
-  ("2022-10-10", "Jueves", "Receta de la tortilla de avena rapida en http://ejemplo.com/tortilla", 3),
-  ("2022-11-08", "Jueves", "Unico dia que no puede variar en alimentos",1);
+  ("2022-09-08", "Lunes", "Este dia puede reemplazarse con el del jueves o invertirse con el del martes" , 2,1),
+  ("2022-09-08", "Martes", "",  2,1),
+  ("2022-09-08", "Miércoles", "Receta de la tortilla de avena rapida en http://ejemplo.com/tortilla", 2,1),
+  ("2022-10-08", "Lunes", "Unico dia que no puede variar en alimentos",4,3),
+  ("2022-10-09", "Miércoles", "Este dia puede reemplazarse con el del jueves o invertirse con el del martes" , 4,3),
+  ("2022-10-11", "Martes", "El paciente es nutricionista, sabe variar su alimento",  2,4),
+  ("2022-10-10", "Jueves", "Receta de la tortilla de avena rapida en http://ejemplo.com/tortilla", 4,3),
+  ("2022-11-08", "Jueves", "Unico dia que no puede variar en alimentos",2,1);
   
 INSERT INTO note
 	(title, date, content)
