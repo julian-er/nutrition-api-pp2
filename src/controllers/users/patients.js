@@ -29,7 +29,6 @@ export class PatientsController extends UsersController {
 		WHERE nr.nutritionist_id = ?
 		`;
 
-		console.log(user_id);
 		this.getById(
 			query,
 			[user_id],
