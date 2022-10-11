@@ -190,7 +190,6 @@ export class UsersController extends BaseSQLController {
 	async createUser(req, res) {
 		const query = `INSERT INTO user ( user_name, password, email, first_name, last_name, phone_number, birth_date , profile_image, isNutritionist, isPatient) VALUES  (? , ? , ? , ? , ?, ? , ? , ? , ? , ?)`;
 		const { user_name, password, email, first_name, last_name, phone_number, birth_date, profile_image, isNutritionist, isPatient } = req.body;
-
 		const userByUserMethod = await this.getByUserMethod({ user_name: user_name }, res);
 		const userByEmailMethod = await this.getByEmailMethod({ email: email }, res);
 
@@ -468,7 +467,7 @@ export class UsersController extends BaseSQLController {
 			response =>
 				res.status(200).json({
 					success: true,
-					message: "Register delete successfully",
+					message: 'Register delete successfully',
 					httpStatusCode: 200,
 					response: []
 				}),

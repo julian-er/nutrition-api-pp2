@@ -8,5 +8,5 @@ import { PatientsController } from '../../controllers/index.js';
 export function setPatientsRoutes(router) {
 	const controller = new PatientsController();
 	router.get('/patients', (req, res) => controller.getPatients(req, res));
-	router.post('/patients/related/:id', (req,res) => controller.getNutritionistPatients(req, res))
+	router.get('/patients/related/:user_id', (req, res) => controller.getNutritionistPatients({ user_id: req.params.user_id }, res));
 }
