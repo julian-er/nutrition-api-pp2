@@ -217,7 +217,7 @@ export class UsersController extends BaseSQLController {
 							success: true,
 							message: response.message,
 							httpStatusCode: 200,
-							response: []
+							response: response.insertedId
 						}),
 					error =>
 						res.status(500).json({
@@ -260,6 +260,35 @@ export class UsersController extends BaseSQLController {
 		);
 	}
 
+	/**
+	 * Creates new user relation register
+	 * @param {Request} req The Express request
+	 * @param {Response} res The Express response
+	 */
+	//#TODO REVIEW PREV RELATIONS TO VALIDATE THAT NEW RELATION NOT EXISTS 
+	async createUserRelation(req, res) {
+		const query = `INSERT INTO nutritionist_patients_relation ( nutritionist_id, patient_id ) VALUES  (? , ? )`;
+		const { nutritionist_id, patient_id } = req.body;
+
+		this.create(
+			query,
+			[nutritionist_id, patient_id],
+			response =>
+				res.status(200).json({
+					success: true,
+					message: 'The relation was created successfully',
+					httpStatusCode: 200,
+					response: []
+				}),
+			error =>
+				res.status(500).json({
+					success: false,
+					message: error.message,
+					httpStatusCode: 500,
+					response: error.error
+				})
+		);
+	}
 	//#endregion CREATE
 
 	//#region EDIT methods

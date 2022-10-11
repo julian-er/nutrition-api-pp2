@@ -11,7 +11,8 @@ export class NutritionistsController extends UsersController {
 	 * @param {Response} res The Express response
 	 */
 	getNutritionists(req, res) {
-		const query = `SELECT * FROM users WHERE isNutritionist = true`;
+		const query = `SELECT * FROM user WHERE isNutritionist = true`;
+
 		this.getAll(
 			query,
 			response => res.status(200).json(response),

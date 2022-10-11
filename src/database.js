@@ -7,6 +7,7 @@ export const mysqlConnection = createConnection({
 	user: process.env.MYSQL_ROOT_NAME, // User for your SQL Server
 	password: process.env.MYSQL_PASSWORD, // Password for your SQL Server
 	database: process.env.MYSQL_DATABASE_NAME,
+	multipleStatements: true,
 	insecureAuth: true
 });
 

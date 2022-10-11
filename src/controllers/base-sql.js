@@ -69,7 +69,7 @@ export default class BaseSQLController {
 	create(query, body, onSuccess, onError) {
 		mysqlConnection.query(query, body, (error, _rows, _fields) => {
 			if (!error) {
-				onSuccess({ message: `The ${this.#SingularEntityId} was created successfully` });
+				onSuccess({ insertedId: _rows.insertId, message: `The ${this.#SingularEntityId} was created successfully` });
 			} else {
 				onError({ message: 'Sorry, we have an unexpected error', error: error.sqlMessage });
 			}

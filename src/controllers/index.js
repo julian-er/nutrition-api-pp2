@@ -9,3 +9,4 @@ export * from './health/allergies.js';
 export * from './day.js';
 export * from './dish.js';
 export * from './login.js';
+export * from './dashboard.js';

@@ -14,6 +14,7 @@ export function setUserRoutes(router) {
 	router.get('/users/measures/:id', (req, res) => controller.getUserMeasures(req, res))
 	router.post('/users/create', (req, res) => controller.createUser(req, res));
 	router.post('/users/measures/add', (req, res) => controller.createMeasureRegisterUser(req, res))
+	router.post('/users/relation/add', (req, res) => controller.createUserRelation(req, res));
 	router.put('/users/update/:id', (req, res) => controller.editUser(req, res));
 	router.put('/users/update-user/:id', (req, res) => controller.changeUserName(req, res));
 	router.put('/users/update-mail/:id', (req, res) => controller.changeMail(req, res));
