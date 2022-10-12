@@ -13,7 +13,7 @@ connectDatabase()
 		//Settings
 		app
 			//Middleware
-			.use(express.json()) // use JSON format
+			.use(express.json({limit: '50mb'})) // use JSON format
 			//CORS
 			.use(cors()) //allow cors from any origins
 			//Routes
